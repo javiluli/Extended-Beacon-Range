@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+logoFile="icon.png" 
+authors="Javiluli"
+description='''
+Better Beacon Range (BBR) is a quality-of-life mod that modifies the base range for all Beacon levels, increasing it to x3.0 the original effect radius.
+• Nivel 1: 60 bloques (Radio)
+• Nivel 2: 90 bloques (Radio)
+• Nivel 3: 120 bloques (Radio)
+• Nivel 4: 150 bloques (Radio)
+'''
+
+# BLOQUE DE MIXINS ACTIVADO
+[[mixins]]
+config="extendedbeaconrange.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"

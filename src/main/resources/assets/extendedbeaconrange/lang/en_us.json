@@ -1,0 +1,13 @@
+{
+  "itemGroup.extendedbeaconrange": "Example Mod Tab",
+  "block.extendedbeaconrange.example_block": "Example Block",
+  "item.extendedbeaconrange.example_item": "Example Item",
+
+  "extendedbeaconrange.configuration.title": "ExtendedBeaconRange Configs",
+  "extendedbeaconrange.configuration.section.extendedbeaconrange.common.toml": "ExtendedBeaconRange Configs",
+  "extendedbeaconrange.configuration.section.extendedbeaconrange.common.toml.title": "ExtendedBeaconRange Configs",
+  "extendedbeaconrange.configuration.items": "Item List",
+  "extendedbeaconrange.configuration.logDirtBlock": "Log Dirt Block",
+  "extendedbeaconrange.configuration.magicNumberIntroduction": "Magic Number Text",
+  "extendedbeaconrange.configuration.magicNumber": "Magic Number"
+}
