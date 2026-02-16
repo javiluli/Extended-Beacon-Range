@@ -3,10 +3,13 @@
 
 # Extended Beacon Range
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-blue?style=for-the-badge&logo=minecraft)
-![Loader](https://img.shields.io/badge/Loader-NeoForge-orange?style=for-the-badge)
-![Performance](https://img.shields.io/badge/Performance-Lightweight-brightgreen?style=for-the-badge)
-![Configuration](https://img.shields.io/badge/Config-None-success?style=for-the-badge)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
+<a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
+<img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
+</a>
+![Loader](https://img.shields.io/badge/Loader-NeoForge-E65100?style=for-the-badge&logo=forge&logoColor=white)
+![Performance](https://img.shields.io/badge/Performance-Lightweight-00C853?style=for-the-badge)
+![Configuration](https://img.shields.io/badge/Configuration-No%20Config-455A64?style=for-the-badge)
 
 </div>
 
