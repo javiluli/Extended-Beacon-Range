@@ -3,7 +3,7 @@
 
 # Extended Beacon Range
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.x-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
 <a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
 <img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
 </a>
@@ -51,6 +51,18 @@ The effect radius of every Beacon pyramid level is multiplied by **3x**.
 🟥 **Vanilla** area _**VS**_ 🟪 **Extended Beacon Range** area
 
 ![Range Comparison](https://github.com/javiluli/Extended-Beacon-Range/blob/master/public/ranges.png?raw=true)
+
+---
+
+## 🛠️ Minecraft Version Compatibility
+
+| Version | Supported |
+| ------- | :-------: |
+| 1.21.1  |    ✅     |
+| 1.21.2  |    ❌     |
+| 1.21.3  |    ✅     |
+
+> Mod is built for **NeoForge loader** and should work on all minor versions of 1.21.x.
 
 ---
 
