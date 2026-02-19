@@ -9,11 +9,11 @@ displayName="${mod_name}"
 logoFile="icon.png" 
 authors="Javiluli"
 description='''
-Better Beacon Range (BBR) is a quality-of-life mod that modifies the base range for all Beacon levels, increasing it to x3.0 the original effect radius.
-• Nivel 1: 60 bloques (Radio)
-• Nivel 2: 90 bloques (Radio)
-• Nivel 3: 120 bloques (Radio)
-• Nivel 4: 150 bloques (Radio)
+Better Beacon Range (BBR) is a quality-of-life mod that modifies the base range for all Beacon levels, increasing it to 3.0x the original effect radius.
+• Level 1: 60 blocks (Radius)
+• Level 2: 90 blocks (Radius)
+• Level 3: 120 blocks (Radius)
+• Level 4: 150 blocks (Radius)
 '''
 
 # BLOQUE DE MIXINS ACTIVADO
