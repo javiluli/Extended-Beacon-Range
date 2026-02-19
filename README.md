@@ -62,6 +62,7 @@ The effect radius of every Beacon pyramid level is multiplied by **3x**.
 | 1.21.2  |    ❌     |
 | 1.21.3  |    ✅     |
 | 1.21.4  |    ✅     |
+| 1.21.5  |    ✅     |
 
 > Mod is built for **NeoForge loader** and should work on all minor versions of 1.21.x.
 
