@@ -56,21 +56,19 @@ The effect radius of every Beacon pyramid level is multiplied by **3x**.
 
 ## 🛠️ Minecraft Version Compatibility
 
-| Version | Supported |
-| ------- | :-------: |
-| 1.21.1  |    ✅     |
-| 1.21.2  |    ❌     |
-| 1.21.3  |    ✅     |
-| 1.21.4  |    ✅     |
-| 1.21.5  |    ✅     |
-| 1.21.6  |    ✅     |
-| 1.21.7  |    ✅     |
-| 1.21.8  |    ✅     |
-| 1.21.9  |    ✅     |
-| 1.21.10 |    ✅     |
-| 1.21.11 |    ✅     |
-
-> Mod is built for **NeoForge loader** and should work on all minor versions of 1.21.x.
+| Version                                                                                                 | Supported |
+| ------------------------------------------------------------------------------------------------------- | :-------: |
+| [1.21.1](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.1)   |    ✅     |
+| 1.21.2                                                                                                  |    ❌     |
+| [1.21.3](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.3)   |    ✅     |
+| [1.21.4](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.4)   |    ✅     |
+| [1.21.5](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.5)   |    ✅     |
+| [1.21.6](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.6)   |    ✅     |
+| [1.21.7](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.7)   |    ✅     |
+| [1.21.8](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.8)   |    ✅     |
+| [1.21.9](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.9)   |    ✅     |
+| [1.21.10](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.10) |    ✅     |
+| [1.21.11](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.11) |    ✅     |
 
 ---
 
