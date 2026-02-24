@@ -3,7 +3,7 @@
 
 # Extended Beacon Range
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.x-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
 <a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
 <img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
 </a>
@@ -51,6 +51,23 @@ The effect radius of every Beacon pyramid level is multiplied by **3x**.
 🟥 **Vanilla** area _**VS**_ 🟪 **Extended Beacon Range** area
 
 ![Range Comparison](https://github.com/javiluli/Extended-Beacon-Range/blob/master/public/ranges.png?raw=true)
+
+---
+
+## 🛠️ Minecraft Version Compatibility
+
+| Version                                                                                                 |         Modloader         |
+| ------------------------------------------------------------------------------------------------------- | :-----------------------: |
+| [1.21.1](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.1)   | NeoForge / Forge / Fabric |
+| [1.21.3](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.3)   |         NeoForge          |
+| [1.21.4](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.4)   |         NeoForge          |
+| [1.21.5](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.5)   |         NeoForge          |
+| [1.21.6](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.6)   |         NeoForge          |
+| [1.21.7](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.7)   |         NeoForge          |
+| [1.21.8](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.8)   |         NeoForge          |
+| [1.21.9](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.9)   |         NeoForge          |
+| [1.21.10](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.10) |         NeoForge          |
+| [1.21.11](https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.11) |         NeoForge          |
 
 ---
 

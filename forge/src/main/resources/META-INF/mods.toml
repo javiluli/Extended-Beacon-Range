@@ -1,0 +1,23 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "${forge_loader_version_range}" #mandatory This is typically bumped every Minecraft version by Forge. See https://files.minecraftforge.net/ for a list of versions.
+license = "${license}" # Review your options at https://choosealicense.com/.
+
+[[mods]] #mandatory
+modId = "${mod_id}" #mandatory
+version = "${version}" #mandatory
+displayName = "${mod_name}" #mandatory
+authors = "${mod_author}" #optional
+description='''
+Extended Beacon Range is a quality-of-life mod that modifies the base range for all Beacon levels, increasing it to 3.0x the original effect radius.
+• Level 1: 60 blocks
+• Level 2: 90 blocks
+• Level 3: 120 blocks
+• Level 4: 150 blocks
+'''
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
