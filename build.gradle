@@ -23,23 +23,24 @@ subprojects {
     }
 }
 
-// Finalizador automatico
-subprojects {
-    tasks.withType(Jar).configureEach {
-        finalizedBy(rootProject.tasks.named('copyJars'))
-    }
+// Nota: evitamos finalizers automáticos para no acoplar builds parciales
+
+tasks.register('cleanOutJars', Delete) {
+    group = 'dev-run'
+    description = 'Limpia la carpeta out_jars'
+    delete layout.projectDirectory.dir('out_jars')
 }
 
 tasks.register('copyJars', Copy) {
     group = 'build'
     description = 'Copia los JARs finales a la carpeta out_jars.'
 
-    dependsOn(':neoforge:build', ':fabric:build', ':forge:build')
+    dependsOn('cleanOutJars', ':neoforge:build', ':fabric:build', ':forge:build')
 
     subprojects.forEach { subproject ->
         if (subproject.name != 'common') {
             from(subproject.layout.buildDirectory.dir('libs')) {
-                include "*.jar"
+                include "*-${minecraft_version}-*.jar"
                 exclude "*-sources.jar", "*-dev.jar", "*-shadow.jar", "*-all.jar", "*-sources-dev.jar", "*-javadoc.jar"
             }
         }
@@ -50,7 +51,41 @@ tasks.register('copyJars', Copy) {
 }
 
 tasks.register('buildAll') {
-    group = 'custom'
-    description = 'Limpia todo y genera los JARs en la carpeta out_jars'
+    group = 'dev-run'
+    description = 'Limpia todo y genera los JARs en la carpeta out_jars (solo version actual)'
     dependsOn 'clean', 'copyJars'
+}
+
+// Tareas raiz para acceso rapido a los runs por loader
+tasks.register('runClientFabric') {
+    group = 'dev-run'
+    description = 'Run Fabric client'
+    dependsOn ':fabric:runClient'
+}
+tasks.register('runServerFabric') {
+    group = 'dev-run'
+    description = 'Run Fabric server'
+    dependsOn ':fabric:runServer'
+}
+
+tasks.register('runClientForge') {
+    group = 'dev-run'
+    description = 'Run Forge client'
+    dependsOn ':forge:runClient'
+}
+tasks.register('runServerForge') {
+    group = 'dev-run'
+    description = 'Run Forge server'
+    dependsOn ':forge:runServer'
+}
+
+tasks.register('runClientNeoForge') {
+    group = 'dev-run'
+    description = 'Run NeoForge client'
+    dependsOn ':neoforge:runClient'
+}
+tasks.register('runServerNeoForge') {
+    group = 'dev-run'
+    description = 'Run NeoForge server'
+    dependsOn ':neoforge:runServer'
 }
