@@ -10,9 +10,13 @@ neoForge {
     if (at.exists()) {
         accessTransformers.from(at.absolutePath)
     }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
+    def parchmentMc = (project.findProperty('parchment_minecraft') ?: '').toString().trim()
+    def parchmentVer = (project.findProperty('parchment_version') ?: '').toString().trim()
+    if (parchmentMc && parchmentVer) {
+        parchment {
+            minecraftVersion = parchment_minecraft
+            mappingsVersion = parchment_version
+        }
     }
 }
 
