@@ -71,12 +71,12 @@ tasks.register('runServerFabric') {
 tasks.register('runClientForge') {
     group = 'dev-run'
     description = 'Run Forge client'
-    dependsOn ':forge:runClient'
+    dependsOn ':forge:Client'
 }
 tasks.register('runServerForge') {
     group = 'dev-run'
     description = 'Run Forge server'
-    dependsOn ':forge:runServer'
+    dependsOn ':forge:Server'
 }
 
 tasks.register('runClientNeoForge') {
