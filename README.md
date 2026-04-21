@@ -58,9 +58,12 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 | Version            | NeoForge | Forge | Fabric |
 | ------------------ | :------: | :---: | :----: |
 | [1.21.1][1.21.1]   |    ✅    |  ✅   |   ✅   |
+| 1.21.2             |    ❌    |  ❌   |   ❌   |
+| [1.21.3][1.21.3]   |    ✅    |  ✅   |   ✅   |
 
 <p align="center">
 ✨ <strong>Made with ❤️ for the Minecraft Community</strong> ✨
 </p>
 
 [1.21.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.1
+[1.21.3]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.3
