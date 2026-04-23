@@ -1,8 +1,8 @@
 plugins {
     // see https://fabricmc.net/develop/ for new versions
-    id 'fabric-loom' version '1.13-SNAPSHOT' apply false
+    id 'net.fabricmc.fabric-loom' version '1.15.5' apply false
     // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
-    id 'net.neoforged.moddev' version '2.0.123' apply false
+    id 'net.neoforged.moddev' version '2.0.141' apply false
 }
 
 tasks.register('clean', Delete) {
@@ -11,11 +11,11 @@ tasks.register('clean', Delete) {
 
 subprojects {
     apply plugin: 'java'
-    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
-        options.release = 21
+        options.release = 25
     }
 
     tasks.withType(Javadoc).configureEach {
@@ -69,13 +69,13 @@ tasks.register('Fabric_runServer') {
 tasks.register('Forge_runClient') {
     group = 'dev-run'
     description = 'Run Forge client'
-    dependsOn ':forge:Client'
+    dependsOn ':forge:runClient'
 }
 
 tasks.register('Forge_runServer') {
     group = 'dev-run'
     description = 'Run Forge server'
-    dependsOn ':forge:Server'
+    dependsOn ':forge:runServer'
 }
 
 tasks.register('NeoForge_runClient') {
