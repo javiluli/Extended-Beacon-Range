@@ -3,7 +3,7 @@
 
 # Extended Beacon Range
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.x-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.x/26.1.x-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
 <a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
 <img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
 </a>
@@ -56,7 +56,7 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 ## 🛠️ Minecraft version and loader compatibility
 
 | Version            | NeoForge | Forge | Fabric |
-| ------------------ | :------: | :---: | :----: |
+|--------------------| :------: | :---: | :----: |
 | [1.21.1][1.21.1]   |    ✅    |  ✅   |   ✅   |
 | 1.21.2             |    ❌    |  ❌   |   ❌   |
 | [1.21.3][1.21.3]   |    ✅    |  ✅   |   ✅   |
@@ -68,6 +68,9 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 | [1.21.9][1.21.9]   |    ✅    |  ✅   |   ✅   |
 | [1.21.10][1.21.10] |    ✅    |  ✅   |   ✅   |
 | [1.21.11][1.21.11] |    ✅    |  ✅   |   ✅   |
+| [26.1][26.1]       |    ✅    |  ✅   |   ✅   |
+| [26.1.1][26.1.1]   |    ✅    |  ✅   |   ✅   |
+| [26.1.2][26.1.2]   |    ✅    |  ✅   |   ✅   |
 
 <p align="center">
 ✨ <strong>Made with ❤️ for the Minecraft Community</strong> ✨
@@ -83,3 +86,6 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 [1.21.9]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.9
 [1.21.10]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.10
 [1.21.11]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.11
+[26.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1
+[26.1.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.1
+[26.1.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.2
