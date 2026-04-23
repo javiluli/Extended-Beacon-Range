@@ -70,6 +70,7 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 | [1.21.11][1.21.11] |    ✅    |  ✅   |   ✅   |
 | [26.1][26.1]       |    ✅    |  ✅   |   ✅   |
 | [26.1.1][26.1.1]   |    ✅    |  ✅   |   ✅   |
+| [26.1.2][26.1.2]   |    ✅    |  ✅   |   ✅   |
 
 <p align="center">
 ✨ <strong>Made with ❤️ for the Minecraft Community</strong> ✨
@@ -87,3 +88,4 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 [1.21.11]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.11
 [26.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1
 [26.1.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.1
+[26.1.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.2
