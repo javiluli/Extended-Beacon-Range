@@ -75,10 +75,10 @@ public final class BeaconPerimeterRenderer {
 		float offset = BeaconAreaSettings.FULL_WALL_BOX_OFFSET;
 		float beaconLocalX = (float) (beaconPos.getX() - cameraPos.x);
 		float beaconLocalZ = (float) (beaconPos.getZ() - cameraPos.z);
-		float minX = beaconLocalX - entry.radius() - offset;
-		float maxX = beaconLocalX + entry.radius() + 1.0f + offset;
-		float minZ = beaconLocalZ - entry.radius() - offset;
-		float maxZ = beaconLocalZ + entry.radius() + 1.0f + offset;
+		float minX = beaconLocalX - entry.radius() + offset;
+		float maxX = beaconLocalX + entry.radius() + 1.0f - offset;
+		float minZ = beaconLocalZ - entry.radius() + offset;
+		float maxZ = beaconLocalZ + entry.radius() + 1.0f - offset;
 		float minY = level.getMinBuildHeight() - (float) cameraPos.y;
 		float beaconY = beaconPos.getY() - (float) cameraPos.y;
 		float fadeStartY = beaconY + BeaconAreaSettings.FULL_WALL_FADE_START_HEIGHT;

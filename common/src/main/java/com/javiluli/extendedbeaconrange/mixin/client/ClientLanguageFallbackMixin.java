@@ -19,7 +19,7 @@ public class ClientLanguageFallbackMixin {
 	private static final String KEY_TOGGLE_OVERLAY = "key.extendedbeaconrange.toggle_overlay";
 
 	/**
-	 * Añade textos mínimos para la pantalla de controles. Al usar putIfAbsent se
+	 * Agrega textos minimos para la pantalla de controles. Al usar putIfAbsent se
 	 * respetan traducciones de resource packs, archivos lang del mod u otros mods.
 	 */
 	@ModifyArg(method = "loadFrom", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap;copyOf(Ljava/util/Map;)Lcom/google/common/collect/ImmutableMap;", remap = false))

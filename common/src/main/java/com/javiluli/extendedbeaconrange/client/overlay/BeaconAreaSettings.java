@@ -31,7 +31,7 @@ public final class BeaconAreaSettings {
 	public static final float FULL_WALL_CORNER_ALPHA = 1.0f;
 	/** Anchura visual, en bloques, de cada tira vertical de esquina. */
 	public static final float FULL_WALL_CORNER_WIDTH = 0.12f;
-	/** Offset fijo del proyecto de referencia para evitar z-fighting con bordes exactos de bloque. */
+	/** Offset interno pequeno para evitar z-fighting sin invadir bloques fuera del rango. */
 	public static final float FULL_WALL_BOX_OFFSET = 0.005f;
 
 	private BeaconAreaSettings() {
