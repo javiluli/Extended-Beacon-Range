@@ -8,14 +8,7 @@ version = "${version}"
 displayName = "${mod_name}"
 credits = "${credits}"
 authors = "${mod_author}"
-description='''
-Extended Beacon Range is a quality-of-life mod that modifies the base range for all Beacon levels, increasing it to x3 the original effect radius.
-
-- Level 1: 60 blocks
-- Level 2: 90 blocks
-- Level 3: 120 blocks
-- Level 4: 150 blocks
-'''
+description='''${description}'''
 
 [[mixins]]
 config = "${mod_id}.mixins.json"

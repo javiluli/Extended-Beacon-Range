@@ -1,24 +1,21 @@
 plugins {
     // see https://fabricmc.net/develop/ for new versions
-    id 'net.fabricmc.fabric-loom' version '1.15.5' apply false
+    id 'fabric-loom' version '1.8-SNAPSHOT' apply false
     // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
-    id 'net.neoforged.moddev' version '2.0.141' apply false
+    id 'net.neoforged.moddev' version '2.0.49-beta' apply false
 }
 
 tasks.register('clean', Delete) {
     delete rootProject.layout.buildDirectory
-    subprojects.each { sub ->
-        delete sub.layout.buildDirectory
-    }
 }
 
 subprojects {
     apply plugin: 'java'
-    java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
-        options.release = 25
+        options.release = 21
     }
 
     tasks.withType(Javadoc).configureEach {
@@ -41,7 +38,7 @@ tasks.register('copyJars', Copy) {
     subprojects.forEach { subproject ->
         if (subproject.name != 'common') {
             from(subproject.layout.buildDirectory.dir('libs')) {
-                include "*-${minecraft_version}-*.jar"
+                include "${mod_id}-${subproject.name}-${minecraft_version}-${version}.jar"
                 exclude "*-sources.jar", "*-dev.jar", "*-shadow.jar", "*-all.jar", "*-sources-dev.jar", "*-javadoc.jar"
             }
         }
@@ -72,13 +69,13 @@ tasks.register('Fabric_runServer') {
 tasks.register('Forge_runClient') {
     group = 'dev-run'
     description = 'Run Forge client'
-    dependsOn ':forge:runClient'
+    dependsOn ':forge:Client'
 }
 
 tasks.register('Forge_runServer') {
     group = 'dev-run'
     description = 'Run Forge server'
-    dependsOn ':forge:runServer'
+    dependsOn ':forge:Server'
 }
 
 tasks.register('NeoForge_runClient') {
