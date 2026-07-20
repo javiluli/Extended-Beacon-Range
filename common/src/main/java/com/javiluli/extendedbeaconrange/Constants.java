@@ -1,10 +1,19 @@
 package com.javiluli.extendedbeaconrange;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class Constants {
+/**
+ * Constantes compartidas por todos los loaders y por el codigo comun del mod.
+ */
+public final class Constants {
+	/**
+	 * Identificador del mod usado por entrypoints, metadata y recursos.
+	 */
 	public static final String MOD_ID = "extendedbeaconrange";
-	public static final String MOD_NAME = "Extended Beacon Range";
-	public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
+
+	/**
+	 * Multiplicador aplicado al radio de efecto vanilla del beacon.
+	 */
+	public static final double BEACON_RANGE_MULTIPLIER = 3.0D;
+
+	private Constants() {
+	}
 }

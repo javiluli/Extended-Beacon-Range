@@ -38,7 +38,7 @@ tasks.register('copyJars', Copy) {
     subprojects.forEach { subproject ->
         if (subproject.name != 'common') {
             from(subproject.layout.buildDirectory.dir('libs')) {
-                include "*-${minecraft_version}-*.jar"
+                include "${mod_id}-${subproject.name}-${minecraft_version}-${version}.jar"
                 exclude "*-sources.jar", "*-dev.jar", "*-shadow.jar", "*-all.jar", "*-sources-dev.jar", "*-javadoc.jar"
             }
         }
