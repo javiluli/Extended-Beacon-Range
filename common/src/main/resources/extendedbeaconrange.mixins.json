@@ -4,9 +4,15 @@
   "package": "com.javiluli.extendedbeaconrange.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
-  "client": [
+  "mixins": [
     "BeaconRangeMixin"
+  ],
+  "client": [
+    "client.BeaconBlockEntityAccessor",
+    "client.KeyMappingAccessor",
+    "client.OptionsAccessor",
+    "client.OptionsLoadMixin",
+    "client.LevelRendererMixin"
   ],
   "server": [],
   "injectors": {
