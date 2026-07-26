@@ -2,36 +2,57 @@ package com.javiluli.extendedbeaconrange.mixin.client;
 
 import com.javiluli.extendedbeaconrange.client.BeaconAreaRenderer;
 
+import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
+import com.mojang.blaze3d.framegraph.FramePass;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
  * Conecta el renderer del nivel vanilla con el overlay client-side de beacons.
  *
  * <p>
- * Se inyecta al final de {@code renderDebug} porque en ese punto el render del mundo ya tiene una {@link PoseStack}, una camara y un
- * {@link MultiBufferSource} listos para dibujar geometria simple anclada al mundo.
+ * En Minecraft 1.21.3 los overlays tardios se dibujan dentro del pass {@code late_debug}. Envolvemos el runnable registrado por vanilla
+ * para dibujar despues de sus overlays, cuando el target principal esta activo y se puede emitir geometria simple anclada al mundo.
  * </p>
  */
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {
 	/**
-	 * Renderiza automaticamente las areas de todos los beacons cargados.
+	 * Envuelve el runnable vanilla del pass late_debug para dibujar el overlay justo despues.
 	 *
-	 * @param poseStack pila de transformaciones del render del nivel.
-	 * @param bufferSource buffers activos del render.
-	 * @param camera camara actual del jugador.
-	 * @param ci informacion del callback de Mixin.
+	 * @param framePass pass de render registrado por vanilla.
+	 * @param vanillaRender accion original del pass late_debug.
+	 * @param frameGraph grafo de render recibido por vanilla.
+	 * @param cameraPos posicion absoluta de la camara.
+	 * @param fogParameters parametros de niebla ya aplicados por vanilla.
 	 */
-	@Inject(method = "renderDebug", at = @At("TAIL"))
-	private void extendedbeaconrange$renderBeaconAreas(PoseStack poseStack, MultiBufferSource bufferSource, Camera camera, CallbackInfo ci) {
-		BeaconAreaRenderer.renderLoadedBeacons(Minecraft.getInstance(), camera, poseStack, bufferSource);
+	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/FogParameters;)V",
+			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
+	private void extendedbeaconrange$renderBeaconAreas(FramePass framePass, Runnable vanillaRender, FrameGraphBuilder frameGraph,
+			Vec3 cameraPos, FogParameters fogParameters) {
+		framePass.executes(() -> {
+			vanillaRender.run();
+			renderBeaconAreas(cameraPos);
+		});
+	}
+
+	/**
+	 * Dibuja el overlay en el buffer principal del cliente y fuerza el vaciado del batch.
+	 *
+	 * @param cameraPos posicion absoluta de la camara.
+	 */
+	private static void renderBeaconAreas(Vec3 cameraPos) {
+		Minecraft minecraft = Minecraft.getInstance();
+		PoseStack poseStack = new PoseStack();
+		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
+		BeaconAreaRenderer.renderLoadedBeacons(minecraft, cameraPos, poseStack, bufferSource);
+		bufferSource.endBatch();
 	}
 }

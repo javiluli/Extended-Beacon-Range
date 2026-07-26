@@ -12,7 +12,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.CoreShaders;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.phys.Vec3;
@@ -64,12 +64,28 @@ public final class BeaconAreaRenderer {
 	 * @param bufferSource fuente de buffers usada por Minecraft para el render.
 	 */
 	public static void renderLoadedBeacons(Minecraft minecraft, Camera camera, PoseStack poseStack, MultiBufferSource bufferSource) {
-		if (hasInvalidRenderContext(minecraft, camera, poseStack, bufferSource) || !BeaconOverlayToggle.updateAndHasVisibleBeacons(minecraft)) {
+		renderLoadedBeacons(minecraft, camera == null ? null : camera.getPosition(), poseStack, bufferSource);
+	}
+
+	/**
+	 * Busca beacons cargados cerca del jugador y renderiza el perimetro usando una posicion de camara ya calculada.
+	 *
+	 * <p>
+	 * Minecraft 1.21.3 mueve los overlays tardios a un pass interno que expone la posicion de camara como {@link Vec3}. Esta sobrecarga
+	 * evita depender de una firma concreta de {@code Camera} y mantiene el render centralizado en una sola clase.
+	 * </p>
+	 *
+	 * @param minecraft instancia de cliente actual.
+	 * @param cameraPos posicion absoluta de la camara.
+	 * @param poseStack pila de transformaciones del frame actual.
+	 * @param bufferSource fuente de buffers usada por Minecraft para el render.
+	 */
+	public static void renderLoadedBeacons(Minecraft minecraft, Vec3 cameraPos, PoseStack poseStack, MultiBufferSource bufferSource) {
+		if (hasInvalidRenderContext(minecraft, cameraPos, poseStack, bufferSource) || !BeaconOverlayToggle.updateAndHasVisibleBeacons(minecraft)) {
 			return;
 		}
 
 		ClientLevel level = minecraft.level;
-		Vec3 cameraPos = camera.getPosition();
 		List<BeaconRenderEntry> beaconsToRender = BeaconAreaCollector.collect(minecraft, cameraPos);
 		if (beaconsToRender.isEmpty()) {
 			return;
@@ -87,8 +103,8 @@ public final class BeaconAreaRenderer {
 	 * @param bufferSource buffers de render del frame.
 	 * @return {@code true} si falta algun dato y se debe saltar el render.
 	 */
-	private static boolean hasInvalidRenderContext(Minecraft minecraft, Camera camera, PoseStack poseStack, MultiBufferSource bufferSource) {
-		return minecraft == null || minecraft.level == null || minecraft.player == null || camera == null || poseStack == null
+	private static boolean hasInvalidRenderContext(Minecraft minecraft, Vec3 cameraPos, PoseStack poseStack, MultiBufferSource bufferSource) {
+		return minecraft == null || minecraft.level == null || minecraft.player == null || cameraPos == null || poseStack == null
 				|| bufferSource == null;
 	}
 
@@ -112,7 +128,7 @@ public final class BeaconAreaRenderer {
 	 * Configura el estado de OpenGL/Minecraft para dibujar quads translucidos del perimetro.
 	 */
 	private static void setupPerimeterRenderState() {
-		RenderSystem.setShader(GameRenderer::getPositionColorShader);
+		RenderSystem.setShader(CoreShaders.POSITION_COLOR);
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.enableDepthTest();

@@ -79,12 +79,32 @@ public final class BeaconPerimeterRenderer {
 		float maxX = beaconLocalX + entry.radius() + 1.0f - offset;
 		float minZ = beaconLocalZ - entry.radius() + offset;
 		float maxZ = beaconLocalZ + entry.radius() + 1.0f - offset;
-		float minY = level.getMinBuildHeight() - (float) cameraPos.y;
+		float minY = getWorldMinY(level) - (float) cameraPos.y;
 		float beaconY = beaconPos.getY() - (float) cameraPos.y;
 		float fadeStartY = beaconY + BeaconAreaSettings.FULL_WALL_FADE_START_HEIGHT;
-		float worldMaxY = level.getMaxBuildHeight() - (float) cameraPos.y;
+		float worldMaxY = getWorldMaxY(level) - (float) cameraPos.y;
 		float maxY = Math.min(beaconY + BeaconAreaSettings.FULL_WALL_HEIGHT, worldMaxY);
 		return new PerimeterGeometry(minX, maxX, minY, fadeStartY, maxY, minZ, maxZ, entry.color());
+	}
+
+	/**
+	 * Obtiene la Y minima construible del mundo desde el tipo de dimension.
+	 *
+	 * @param level mundo cliente.
+	 * @return Y minima absoluta del mundo.
+	 */
+	private static int getWorldMinY(ClientLevel level) {
+		return level.dimensionType().minY();
+	}
+
+	/**
+	 * Obtiene la Y maxima construible del mundo desde el tipo de dimension.
+	 *
+	 * @param level mundo cliente.
+	 * @return Y maxima absoluta del mundo.
+	 */
+	private static int getWorldMaxY(ClientLevel level) {
+		return level.dimensionType().minY() + level.dimensionType().height();
 	}
 
 	/**
