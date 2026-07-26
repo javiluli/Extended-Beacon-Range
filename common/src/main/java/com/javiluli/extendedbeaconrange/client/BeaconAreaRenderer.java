@@ -7,17 +7,16 @@ import com.javiluli.extendedbeaconrange.client.overlay.BeaconRenderEntry;
 
 import java.util.List;
 
-import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.SubmitNodeStorage;
+import net.minecraft.client.renderer.feature.CustomFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.world.phys.Vec3;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import org.joml.Matrix4f;
 
 /**
  * Punto de entrada del overlay 3D de beacons llamado desde {@code LevelRendererMixin}.
@@ -33,8 +32,8 @@ public final class BeaconAreaRenderer {
 	 * Tipo de renderizado usado por las paredes translucidas del perimetro.
 	 *
 	 * <p>
-	 * Minecraft 1.21.5 mueve los shaders al sistema de {@code RenderPipeline}. Usamos el tipo vanilla de structure quads porque mantiene
-	 * posicion/color, mezcla translucida, sin culling y sin escritura de profundidad, igual que el renderer manual anterior.
+	 * Minecraft 26.2 mueve la geometria del nivel al sistema de {@code SubmitNodeCollector}. Usamos el tipo vanilla de debug quads porque
+	 * mantiene posicion/color, mezcla translucida, ordenacion en subida y profundidad normal contra bloques solidos.
 	 * </p>
 	 */
 	private static final RenderType PERIMETER_QUADS = RenderTypes.debugQuads();
@@ -51,30 +50,11 @@ public final class BeaconAreaRenderer {
 	 * </p>
 	 *
 	 * @param minecraft instancia de cliente actual.
-	 * @param camera camara activa del render del nivel.
-	 * @param poseStack pila de transformaciones del frame actual.
-	 * @param bufferSource fuente de buffers usada por Minecraft para el render.
-	 */
-	public static void renderLoadedBeacons(Minecraft minecraft, Camera camera, PoseStack poseStack, MultiBufferSource bufferSource) {
-		Vec3 cameraPos = camera == null ? null : camera.position();
-		renderLoadedBeacons(minecraft, cameraPos, poseStack, bufferSource);
-	}
-
-	/**
-	 * Busca beacons cargados cerca del jugador y renderiza el perimetro usando una posicion de camara ya calculada.
-	 *
-	 * <p>
-	 * Minecraft 1.21.3 mueve los overlays tardios a un pass interno que expone la posicion de camara como {@link Vec3}. Esta sobrecarga
-	 * evita depender de una firma concreta de {@code Camera} y mantiene el render centralizado en una sola clase.
-	 * </p>
-	 *
-	 * @param minecraft instancia de cliente actual.
 	 * @param cameraPos posicion absoluta de la camara.
-	 * @param poseStack pila de transformaciones del frame actual.
-	 * @param bufferSource fuente de buffers usada por Minecraft para el render.
+	 * @param submitNodeCollector collector del render del nivel donde se registra la geometria.
 	 */
-	public static void renderLoadedBeacons(Minecraft minecraft, Vec3 cameraPos, PoseStack poseStack, MultiBufferSource bufferSource) {
-		if (hasInvalidRenderContext(minecraft, cameraPos, poseStack, bufferSource) || !BeaconOverlayToggle.updateAndHasVisibleBeacons(minecraft)) {
+	public static void submitLoadedBeacons(Minecraft minecraft, Vec3 cameraPos, SubmitNodeCollector submitNodeCollector) {
+		if (hasInvalidRenderContext(minecraft, cameraPos, submitNodeCollector) || !BeaconOverlayToggle.updateAndHasVisibleBeacons(minecraft)) {
 			return;
 		}
 
@@ -84,37 +64,48 @@ public final class BeaconAreaRenderer {
 			return;
 		}
 
-		renderBeaconAreas(level, cameraPos, beaconsToRender, poseStack, bufferSource);
+		submitBeaconAreas(level, cameraPos, beaconsToRender, submitNodeCollector);
 	}
 
 	/**
 	 * Comprueba que todas las dependencias del render existan antes de tocar estado de cliente.
 	 *
 	 * @param minecraft instancia de cliente recibida desde el mixin.
-	 * @param camera camara activa.
-	 * @param poseStack pila de transformaciones del frame.
-	 * @param bufferSource buffers de render del frame.
+	 * @param cameraPos posicion absoluta de la camara.
+	 * @param submitNodeCollector collector del render del nivel.
 	 * @return {@code true} si falta algun dato y se debe saltar el render.
 	 */
-	private static boolean hasInvalidRenderContext(Minecraft minecraft, Vec3 cameraPos, PoseStack poseStack, MultiBufferSource bufferSource) {
-		return minecraft == null || minecraft.level == null || minecraft.player == null || cameraPos == null || poseStack == null
-				|| bufferSource == null;
+	private static boolean hasInvalidRenderContext(Minecraft minecraft, Vec3 cameraPos, SubmitNodeCollector submitNodeCollector) {
+		return minecraft == null || minecraft.level == null || minecraft.player == null || cameraPos == null || submitNodeCollector == null;
 	}
 
 	/**
-	 * Emite todas las areas juntas para ordenar paredes transparentes entre distintos beacons.
+	 * Registra todas las areas juntas despues del terreno translucido.
+	 *
+	 * <p>
+	 * {@code afterTerrain} mantiene el orden mas estable que expone el collector para geometria personalizada y conserva el depth test del
+	 * {@link RenderType}, asi que los bloques solidos siguen ocultando el perimetro. Si otro loader cambia el collector interno, se usa el
+	 * submit normal como fallback para no romper el render.
+	 * </p>
 	 *
 	 * @param level mundo cliente.
 	 * @param cameraPos posicion absoluta de la camara.
 	 * @param entries beacons preparados para el frame actual.
-	 * @param poseStack pila de transformaciones del frame.
-	 * @param bufferSource buffers de render del frame.
+	 * @param submitNodeCollector collector del render del nivel.
 	 */
-	private static void renderBeaconAreas(ClientLevel level, Vec3 cameraPos, List<BeaconRenderEntry> entries, PoseStack poseStack,
-			MultiBufferSource bufferSource) {
-		Matrix4f poseMatrix = poseStack.last().pose();
-		VertexConsumer faceBuffer = bufferSource.getBuffer(PERIMETER_QUADS);
-		BeaconPerimeterRenderer.renderAll(level, entries, poseMatrix, faceBuffer, cameraPos);
+	private static void submitBeaconAreas(ClientLevel level, Vec3 cameraPos, List<BeaconRenderEntry> entries,
+			SubmitNodeCollector submitNodeCollector) {
+		PoseStack poseStack = new PoseStack();
+		SubmitNodeCollector.CustomGeometryRenderer geometryRenderer = (pose, vertexConsumer) -> BeaconPerimeterRenderer.renderAll(level,
+				entries, pose.pose(), vertexConsumer, cameraPos);
+
+		if (submitNodeCollector instanceof SubmitNodeStorage submitNodeStorage) {
+			submitNodeStorage.order(0).afterTerrain
+					.submit(new CustomFeatureRenderer.Submit(poseStack.last().copy(), PERIMETER_QUADS, geometryRenderer));
+			return;
+		}
+
+		submitNodeCollector.submitCustomGeometry(poseStack, PERIMETER_QUADS, geometryRenderer);
 	}
 
 }

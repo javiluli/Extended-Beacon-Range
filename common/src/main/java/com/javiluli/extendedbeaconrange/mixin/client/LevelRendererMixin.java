@@ -2,60 +2,36 @@ package com.javiluli.extendedbeaconrange.mixin.client;
 
 import com.javiluli.extendedbeaconrange.client.BeaconAreaRenderer;
 
-import com.mojang.blaze3d.buffers.GpuBufferSlice;
-import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
-import com.mojang.blaze3d.framegraph.FramePass;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.world.phys.Vec3;
-import org.joml.Matrix4fc;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.state.level.LevelRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Conecta el renderer del nivel vanilla con el overlay client-side de beacons.
  *
  * <p>
- * En las versiones modernas los overlays tardios se dibujan dentro del pass {@code late_debug}. Envolvemos el runnable registrado por vanilla
- * para dibujar despues de sus overlays, cuando el target principal esta activo y se puede emitir geometria simple anclada al mundo.
+ * Minecraft 26.2 envia la geometria del nivel a {@code SubmitNodeCollector}. Inyectamos el overlay antes de cerrar los gizmos vanilla para
+ * que las paredes del beacon entren en la misma fase translucida que el resto de geometria personalizada.
  * </p>
  */
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin {
 	/**
-	 * Envuelve el runnable vanilla del pass late_debug para dibujar el overlay justo despues.
+	 * Registra el overlay del beacon en el collector del frame actual.
 	 *
-	 * @param framePass pass de render registrado por vanilla.
-	 * @param vanillaRender accion original del pass late_debug.
-	 * @param frameGraph grafo de render recibido por vanilla.
-	 * @param cameraRenderState estado de camara usado por vanilla.
-	 * @param gpuBufferSlice uniforms de render preparados por vanilla para el pass.
-	 * @param modelViewMatrix matriz de vista usada por vanilla para sus overlays debug.
+	 * @param levelRenderState estado de render del nivel, incluida la posicion de camara.
+	 * @param submitNodeCollector collector donde Minecraft agrupa la geometria.
+	 * @param renderOutline indica si vanilla debe enviar el outline del bloque mirado.
+	 * @param callbackInfo control del callback Mixin.
 	 */
-	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4fc;)V",
-			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
-	private void extendedbeaconrange$renderBeaconAreas(FramePass framePass, Runnable vanillaRender, FrameGraphBuilder frameGraph,
-			CameraRenderState cameraRenderState, GpuBufferSlice gpuBufferSlice, Matrix4fc modelViewMatrix) {
-		framePass.executes(() -> {
-			vanillaRender.run();
-			renderBeaconAreas(cameraRenderState.pos);
-		});
-	}
-
-	/**
-	 * Dibuja el overlay en el buffer principal del cliente y fuerza el vaciado del batch.
-	 *
-	 * @param cameraPos posicion absoluta de la camara.
-	 */
-	private static void renderBeaconAreas(Vec3 cameraPos) {
-		Minecraft minecraft = Minecraft.getInstance();
-		PoseStack poseStack = new PoseStack();
-		MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
-		BeaconAreaRenderer.renderLoadedBeacons(minecraft, cameraPos, poseStack, bufferSource);
-		bufferSource.endBatch();
+	@Inject(method = "submitFeatures", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;finalizeGizmoCollection()V"))
+	private void extendedbeaconrange$submitBeaconAreas(LevelRenderState levelRenderState, SubmitNodeCollector submitNodeCollector,
+			boolean renderOutline, CallbackInfo callbackInfo) {
+		BeaconAreaRenderer.submitLoadedBeacons(Minecraft.getInstance(), levelRenderState.cameraRenderState.pos, submitNodeCollector);
 	}
 }

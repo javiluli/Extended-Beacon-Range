@@ -142,7 +142,7 @@ public final class BeaconOverlayToggle {
 	 * @param minecraft instancia de cliente actual.
 	 */
 	private static void updateOverlayToggleShortcut(Minecraft minecraft) {
-		if (minecraft.screen != null || minecraft.getWindow() == null) {
+		if (minecraft.gui.screen() != null || minecraft.getWindow() == null) {
 			toggleShortcutWasDown = false;
 			return;
 		}

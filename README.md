@@ -3,7 +3,7 @@
 
 # Extended Beacon Range
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.x/26.1.x-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.x/26.1.x/26.2-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
 <a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
 <img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
 </a>
@@ -83,6 +83,7 @@ The table below lists the current **2.0.x** downloads.
 | [26.1][26.1]       |    ✅    |  ✅   |   ✅   |
 | [26.1.1][26.1.1]   |    ✅    |  ✅   |   ✅   |
 | [26.1.2][26.1.2]   |    ✅    |  ✅   |   ✅   |
+| [26.2][26.2]       |    ✅    |  ✅   |   ✅   |
 
 ### Legacy 1.x
 
@@ -114,6 +115,7 @@ The table below lists the current **2.0.x** downloads.
 [26.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1
 [26.1.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.1
 [26.1.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.2
+[26.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.2
 
 <!--  -->
 
