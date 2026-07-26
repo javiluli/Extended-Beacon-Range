@@ -1,7 +1,7 @@
 package com.javiluli.extendedbeaconrange.client.overlay;
 
+import com.javiluli.extendedbeaconrange.Constants;
 import com.javiluli.extendedbeaconrange.mixin.client.OptionsAccessor;
-import com.javiluli.extendedbeaconrange.mixin.client.KeyMappingAccessor;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.platform.Window;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
@@ -16,6 +17,7 @@ import net.minecraft.client.Options;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,10 +33,9 @@ import org.lwjgl.glfw.GLFW;
 public final class BeaconOverlayToggle {
 	/** Nombre de traduccion del keybind configurable que aparece en Controles. */
 	private static final String TOGGLE_KEY_TRANSLATION = "key.extendedbeaconrange.toggle_overlay";
-	/** Categoria de traduccion donde Minecraft agrupa el keybind dentro de Controles. */
-	private static final String KEY_CATEGORY_TRANSLATION = "key.categories.extendedbeaconrange";
-	/** Posicion de la categoria del mod tras las categorias vanilla. */
-	private static final int KEY_CATEGORY_SORT_ORDER = 8;
+	/** Categoria vanilla registrada para agrupar el keybind del mod dentro de Controles. */
+	private static final KeyMapping.Category KEY_CATEGORY = KeyMapping.Category
+			.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "controls"));
 	/**
 	 * Keybind configurable desde los ajustes vanilla.
 	 *
@@ -44,7 +45,7 @@ public final class BeaconOverlayToggle {
 	 * </p>
 	 */
 	private static final KeyMapping TOGGLE_OVERLAY_KEY = new KeyMapping(TOGGLE_KEY_TRANSLATION, InputConstants.Type.KEYSYM,
-			GLFW.GLFW_KEY_H, KEY_CATEGORY_TRANSLATION);
+			GLFW.GLFW_KEY_H, KEY_CATEGORY);
 	/**
 	 * Beacons seleccionados por el jugador para renderizar su perimetro.
 	 *
@@ -107,7 +108,6 @@ public final class BeaconOverlayToggle {
 			return;
 		}
 
-		registerKeyCategorySortOrder();
 		KeyMapping[] keyMappings = options.keyMappings;
 		for (KeyMapping keyMapping : keyMappings) {
 			if (keyMapping == TOGGLE_OVERLAY_KEY) {
@@ -121,13 +121,6 @@ public final class BeaconOverlayToggle {
 		((OptionsAccessor) options).extendedbeaconrange$setKeyMappings(expandedKeyMappings);
 		KeyMapping.resetMapping();
 		keyMappingRegistered = true;
-	}
-
-	/**
-	 * Registra la categoria del mod en el orden interno de Minecraft para evitar fallos al abrir Controles.
-	 */
-	private static void registerKeyCategorySortOrder() {
-		KeyMappingAccessor.extendedbeaconrange$getCategorySortOrder().putIfAbsent(KEY_CATEGORY_TRANSLATION, KEY_CATEGORY_SORT_ORDER);
 	}
 
 	/**
@@ -160,7 +153,7 @@ public final class BeaconOverlayToggle {
 			toggledByConfigurableKey = true;
 		}
 
-		long window = minecraft.getWindow().getWindow();
+		Window window = minecraft.getWindow();
 		boolean controlDown = InputConstants.isKeyDown(window, GLFW.GLFW_KEY_LEFT_CONTROL)
 				|| InputConstants.isKeyDown(window, GLFW.GLFW_KEY_RIGHT_CONTROL);
 		boolean shortcutDown = controlDown && InputConstants.isKeyDown(window, GLFW.GLFW_KEY_H);

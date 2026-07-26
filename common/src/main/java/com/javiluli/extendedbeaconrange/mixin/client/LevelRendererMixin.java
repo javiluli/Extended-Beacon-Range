@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,11 +33,12 @@ public class LevelRendererMixin {
 	 * @param frameGraph grafo de render recibido por vanilla.
 	 * @param cameraPos posicion absoluta de la camara.
 	 * @param gpuBufferSlice uniforms de render preparados por vanilla para el pass.
+	 * @param frustum volumen visible usado por vanilla para sus overlays debug.
 	 */
-	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V",
+	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lnet/minecraft/client/renderer/culling/Frustum;)V",
 			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
 	private void extendedbeaconrange$renderBeaconAreas(FramePass framePass, Runnable vanillaRender, FrameGraphBuilder frameGraph,
-			Vec3 cameraPos, GpuBufferSlice gpuBufferSlice) {
+			Vec3 cameraPos, GpuBufferSlice gpuBufferSlice, Frustum frustum) {
 		framePass.executes(() -> {
 			vanillaRender.run();
 			renderBeaconAreas(cameraPos);

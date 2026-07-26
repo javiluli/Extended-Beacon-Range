@@ -17,7 +17,7 @@ import net.minecraft.client.resources.language.ClientLanguage;
  */
 @Mixin(ClientLanguage.class)
 public class ClientLanguageFallbackMixin {
-	private static final String KEY_CATEGORY = "key.categories.extendedbeaconrange";
+	private static final String KEY_CATEGORY = "key.category.extendedbeaconrange.controls";
 	private static final String KEY_TOGGLE_OVERLAY = "key.extendedbeaconrange.toggle_overlay";
 
 	/**

@@ -1,4 +1,4 @@
 {
-  "key.categories.extendedbeaconrange": "Extended Beacon Range",
+  "key.category.extendedbeaconrange.controls": "Extended Beacon Range",
   "key.extendedbeaconrange.toggle_overlay": "Toggle targeted beacon perimeter"
 }
