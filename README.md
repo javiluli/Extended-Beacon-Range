@@ -51,7 +51,7 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 
 🟥 **Vanilla** area **_vs_** 🟪 **Extended Beacon Range** area
 
-![Range Comparison](./public/examples/example.png)
+![Range Comparison](./public/examples/all-ranges.png)
 
 ## 🛠️ Minecraft version and loader compatibility
 
