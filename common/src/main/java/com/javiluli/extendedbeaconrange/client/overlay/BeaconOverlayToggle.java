@@ -17,7 +17,7 @@ import net.minecraft.client.Options;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +35,7 @@ public final class BeaconOverlayToggle {
 	private static final String TOGGLE_KEY_TRANSLATION = "key.extendedbeaconrange.toggle_overlay";
 	/** Categoria vanilla registrada para agrupar el keybind del mod dentro de Controles. */
 	private static final KeyMapping.Category KEY_CATEGORY = KeyMapping.Category
-			.register(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "controls"));
+			.register(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "controls"));
 	/**
 	 * Keybind configurable desde los ajustes vanilla.
 	 *

@@ -11,7 +11,8 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.world.phys.Vec3;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -36,7 +37,7 @@ public final class BeaconAreaRenderer {
 	 * posicion/color, mezcla translucida, sin culling y sin escritura de profundidad, igual que el renderer manual anterior.
 	 * </p>
 	 */
-	private static final RenderType PERIMETER_QUADS = RenderType.debugStructureQuads();
+	private static final RenderType PERIMETER_QUADS = RenderTypes.debugQuads();
 
 	private BeaconAreaRenderer() {
 	}
@@ -55,7 +56,8 @@ public final class BeaconAreaRenderer {
 	 * @param bufferSource fuente de buffers usada por Minecraft para el render.
 	 */
 	public static void renderLoadedBeacons(Minecraft minecraft, Camera camera, PoseStack poseStack, MultiBufferSource bufferSource) {
-		renderLoadedBeacons(minecraft, camera == null ? null : camera.getPosition(), poseStack, bufferSource);
+		Vec3 cameraPos = camera == null ? null : camera.position();
+		renderLoadedBeacons(minecraft, cameraPos, poseStack, bufferSource);
 	}
 
 	/**

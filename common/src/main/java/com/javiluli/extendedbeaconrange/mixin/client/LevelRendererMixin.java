@@ -9,8 +9,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -31,17 +32,17 @@ public class LevelRendererMixin {
 	 * @param framePass pass de render registrado por vanilla.
 	 * @param vanillaRender accion original del pass late_debug.
 	 * @param frameGraph grafo de render recibido por vanilla.
-	 * @param cameraPos posicion absoluta de la camara.
+	 * @param cameraRenderState estado de camara usado por vanilla.
 	 * @param gpuBufferSlice uniforms de render preparados por vanilla para el pass.
-	 * @param frustum volumen visible usado por vanilla para sus overlays debug.
+	 * @param frustumMatrix matriz de frustum usada por vanilla para sus overlays debug.
 	 */
-	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lnet/minecraft/client/renderer/culling/Frustum;)V",
+	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4f;)V",
 			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
 	private void extendedbeaconrange$renderBeaconAreas(FramePass framePass, Runnable vanillaRender, FrameGraphBuilder frameGraph,
-			Vec3 cameraPos, GpuBufferSlice gpuBufferSlice, Frustum frustum) {
+			CameraRenderState cameraRenderState, GpuBufferSlice gpuBufferSlice, Matrix4f frustumMatrix) {
 		framePass.executes(() -> {
 			vanillaRender.run();
-			renderBeaconAreas(cameraPos);
+			renderBeaconAreas(cameraRenderState.pos);
 		});
 	}
 
