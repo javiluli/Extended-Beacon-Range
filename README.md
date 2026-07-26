@@ -3,7 +3,7 @@
 
 # Extended Beacon Range
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1/1.21.3/1.21.4/1.21.5%20(2.0.x)-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1/1.21.3/1.21.4/1.21.5/1.21.6%20(2.0.x)-2E7D32?style=for-the-badge&logo=minecraft&logoColor=white)
 <a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
 <img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
 </a>
@@ -31,7 +31,7 @@
 - ✨ Works in multiplayer when installed on both client and server
 - ✨ Just install and play
 
-> The Beacon perimeter overlay is part of **mod version 2.0.x** and is currently available for **Minecraft 1.21.1**, **1.21.3**, **1.21.4** and **1.21.5**.
+> The Beacon perimeter overlay is part of **mod version 2.0.x** and is currently available for **Minecraft 1.21.1**, **1.21.3**, **1.21.4**, **1.21.5** and **1.21.6**.
 > Newer Minecraft versions can still use the latest **1.x** releases, which include the extended range only.
 
 ## 📏 Range Comparison
@@ -57,10 +57,10 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 
 | Mod version line | Minecraft versions | NeoForge | Forge | Fabric | Features |
 | ---------------- | ------------------ | :------: | :---: | :----: | -------- |
-| **2.0.x**        | **[1.21.1][1.21.1]**, **[1.21.3][1.21.3]**, **[1.21.4][1.21.4]**, **[1.21.5][1.21.5]** |    ✅    |  ✅   |   ✅   | Extended range + Beacon perimeter overlay |
+| **2.0.x**        | **[1.21.1][1.21.1]**, **[1.21.3][1.21.3]**, **[1.21.4][1.21.4]**, **[1.21.5][1.21.5]**, **[1.21.6][1.21.6]** |    ✅    |  ✅   |   ✅   | Extended range + Beacon perimeter overlay |
 | **1.x**          | Listed below       |    ✅    |  ✅   |   ✅   | Extended range only |
 
-> If you play on Minecraft versions newer than **1.21.5**, use the latest **1.x** file until version **2.0.x** is ported.
+> If you play on Minecraft versions newer than **1.21.6**, use the latest **1.x** file until version **2.0.x** is ported.
 
 ### Legacy 1.x compatibility
 

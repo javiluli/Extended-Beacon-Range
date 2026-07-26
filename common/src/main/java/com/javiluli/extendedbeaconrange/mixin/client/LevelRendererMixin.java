@@ -2,11 +2,11 @@ package com.javiluli.extendedbeaconrange.mixin.client;
 
 import com.javiluli.extendedbeaconrange.client.BeaconAreaRenderer;
 
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.framegraph.FrameGraphBuilder;
 import com.mojang.blaze3d.framegraph.FramePass;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.phys.Vec3;
@@ -31,12 +31,12 @@ public class LevelRendererMixin {
 	 * @param vanillaRender accion original del pass late_debug.
 	 * @param frameGraph grafo de render recibido por vanilla.
 	 * @param cameraPos posicion absoluta de la camara.
-	 * @param fogParameters parametros de niebla ya aplicados por vanilla.
+	 * @param gpuBufferSlice uniforms de render preparados por vanilla para el pass.
 	 */
-	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/FogParameters;)V",
+	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/world/phys/Vec3;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V",
 			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
 	private void extendedbeaconrange$renderBeaconAreas(FramePass framePass, Runnable vanillaRender, FrameGraphBuilder frameGraph,
-			Vec3 cameraPos, FogParameters fogParameters) {
+			Vec3 cameraPos, GpuBufferSlice gpuBufferSlice) {
 		framePass.executes(() -> {
 			vanillaRender.run();
 			renderBeaconAreas(cameraPos);
