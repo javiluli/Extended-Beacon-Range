@@ -7,21 +7,16 @@ import com.javiluli.extendedbeaconrange.client.overlay.BeaconRenderEntry;
 
 import java.util.List;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.CoreShaders;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.phys.Vec3;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import org.joml.Matrix4f;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Punto de entrada del overlay 3D de beacons llamado desde {@code LevelRendererMixin}.
@@ -37,15 +32,11 @@ public final class BeaconAreaRenderer {
 	 * Tipo de renderizado usado por las paredes translucidas del perimetro.
 	 *
 	 * <p>
-	 * Se mantiene junto al punto de entrada del render porque solo este renderer solicita el buffer. El estado replica el enfoque del
-	 * proyecto de referencia: shader posicion/color, mezcla translucida, profundidad de lectura activa, sin culling y sin escritura de
-	 * profundidad. Con esto las paredes se ocultan tras bloques solidos, pero no tapan otros perimetros transparentes dibujados despues.
+	 * Minecraft 1.21.5 mueve los shaders al sistema de {@code RenderPipeline}. Usamos el tipo vanilla de structure quads porque mantiene
+	 * posicion/color, mezcla translucida, sin culling y sin escritura de profundidad, igual que el renderer manual anterior.
 	 * </p>
 	 */
-	private static final RenderType PERIMETER_QUADS = new RenderType("extended_beacon_range_area", DefaultVertexFormat.POSITION_COLOR,
-			VertexFormat.Mode.QUADS, 256, false, true, BeaconAreaRenderer::setupPerimeterRenderState,
-			BeaconAreaRenderer::clearPerimeterRenderState) {
-	};
+	private static final RenderType PERIMETER_QUADS = RenderType.debugStructureQuads();
 
 	private BeaconAreaRenderer() {
 	}
@@ -124,26 +115,4 @@ public final class BeaconAreaRenderer {
 		BeaconPerimeterRenderer.renderAll(level, entries, poseMatrix, faceBuffer, cameraPos);
 	}
 
-	/**
-	 * Configura el estado de OpenGL/Minecraft para dibujar quads translucidos del perimetro.
-	 */
-	private static void setupPerimeterRenderState() {
-		RenderSystem.setShader(CoreShaders.POSITION_COLOR);
-		RenderSystem.enableBlend();
-		RenderSystem.defaultBlendFunc();
-		RenderSystem.enableDepthTest();
-		RenderSystem.depthFunc(GL11.GL_LEQUAL);
-		RenderSystem.depthMask(false);
-		RenderSystem.colorMask(true, true, true, true);
-		RenderSystem.disableCull();
-	}
-
-	/**
-	 * Restaura las partes del estado de render modificadas por {@link #setupPerimeterRenderState()}.
-	 */
-	private static void clearPerimeterRenderState() {
-		RenderSystem.enableCull();
-		RenderSystem.depthMask(true);
-		RenderSystem.disableBlend();
-	}
 }
