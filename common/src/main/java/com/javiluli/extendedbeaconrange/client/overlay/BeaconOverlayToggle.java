@@ -285,7 +285,7 @@ public final class BeaconOverlayToggle {
 		if (minecraft.player != null) {
 			Component message = Component.literal(label + " ").withStyle(ChatFormatting.WHITE)
 					.append(Component.literal(enabled ? "ON" : "OFF").withStyle(enabled ? ChatFormatting.GREEN : ChatFormatting.RED));
-			minecraft.player.displayClientMessage(message, true);
+			minecraft.player.sendOverlayMessage(message);
 		}
 	}
 }

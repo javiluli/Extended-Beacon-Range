@@ -9,9 +9,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Matrix4f;
+import org.joml.Matrix4fc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * Conecta el renderer del nivel vanilla con el overlay client-side de beacons.
  *
  * <p>
- * En Minecraft 1.21.3 los overlays tardios se dibujan dentro del pass {@code late_debug}. Envolvemos el runnable registrado por vanilla
+ * En las versiones modernas los overlays tardios se dibujan dentro del pass {@code late_debug}. Envolvemos el runnable registrado por vanilla
  * para dibujar despues de sus overlays, cuando el target principal esta activo y se puede emitir geometria simple anclada al mundo.
  * </p>
  */
@@ -34,12 +34,12 @@ public class LevelRendererMixin {
 	 * @param frameGraph grafo de render recibido por vanilla.
 	 * @param cameraRenderState estado de camara usado por vanilla.
 	 * @param gpuBufferSlice uniforms de render preparados por vanilla para el pass.
-	 * @param frustumMatrix matriz de frustum usada por vanilla para sus overlays debug.
+	 * @param modelViewMatrix matriz de vista usada por vanilla para sus overlays debug.
 	 */
-	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4f;)V",
+	@Redirect(method = "addLateDebugPass(Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4fc;)V",
 			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/framegraph/FramePass;executes(Ljava/lang/Runnable;)V"))
 	private void extendedbeaconrange$renderBeaconAreas(FramePass framePass, Runnable vanillaRender, FrameGraphBuilder frameGraph,
-			CameraRenderState cameraRenderState, GpuBufferSlice gpuBufferSlice, Matrix4f frustumMatrix) {
+			CameraRenderState cameraRenderState, GpuBufferSlice gpuBufferSlice, Matrix4fc modelViewMatrix) {
 		framePass.executes(() -> {
 			vanillaRender.run();
 			renderBeaconAreas(cameraRenderState.pos);
