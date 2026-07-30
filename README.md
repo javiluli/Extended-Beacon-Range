@@ -7,6 +7,9 @@
 <a href="https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range">
 <img src="https://img.shields.io/curseforge/dt/1463213?style=for-the-badge&color=242629&labelColor=F16436&logo=curseforge&logoColor=white&label=" alt="CurseForge">
 </a>
+<a href="https://modrinth.com/mod/extended-beacon-range">
+<img src="https://img.shields.io/modrinth/dt/extended-beacon-range?logo=modrinth&label=&suffix=%20&style=for-the-badge&color=242629&labelColor=5CA424&logoColor=1C1C1C" alt="Modrinth">
+</a>
 ![Loader](https://img.shields.io/badge/Loader-NeoForge/Forge/Fabric-E65100?style=for-the-badge&logo=forge&logoColor=white)
 ![Performance](https://img.shields.io/badge/Performance-Lightweight-00C853?style=for-the-badge)
 ![Configuration](https://img.shields.io/badge/Configuration-No%20Config-455A64?style=for-the-badge)
@@ -31,7 +34,6 @@
 - ✨ Beacon effect radius multiplied by **x3**
 - ✨ Press **H** to toggle all Beacon perimeters
 - ✨ Look at a Beacon and press **H** to toggle only that Beacon
-- ✨ Keybind configurable in **Options > Controls**
 - ✨ Multiplayer range works from the server side
 - ✨ Optional client-side overlay for players who want it
 - ✨ Just install and play
