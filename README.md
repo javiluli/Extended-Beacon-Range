@@ -16,29 +16,25 @@
 
 </div>
 
-> [!IMPORTANT]
-> In multiplayer, the mod only needs to be installed on the **server** for the Beacon x3 range to work for every player.
-> Players only need the mod on their **client** if they want to use the Beacon perimeter overlay with **H**.
-
-> [!WARNING]
-> Looking for old **v1.x** files? Most v1.0 files were archived because of a multiplayer range issue.
-> Please read [Legacy 1.x](#legacy-1x) before downloading older versions.
-
-> [!NOTE]
-> If you encounter any bugs or unexpected behavior, please report them on GitHub or via the CurseForge comments section.
-
-## ✨ Features ✨
+<div align="center">
 
 **Extended Beacon Range** is a lightweight quality-of-life mod that makes Beacons stronger and easier to visualize.
+
+</div>
+
+## ✨ Features ✨
 
 - ✨ Beacon effect radius multiplied by **x3**
 - ✨ Press **H** to toggle all Beacon perimeters
 - ✨ Look at a Beacon and press **H** to toggle only that Beacon
 - ✨ Multiplayer range works from the server side
 - ✨ Optional client-side overlay for players who want it
-- ✨ Just install and play
 
-## Install Notes
+## 📝 Install Notes
+
+> [!IMPORTANT]
+> In multiplayer, the mod only needs to be installed on the **server** for the Beacon x3 range to work for every player.
+> Players only need the mod on their **client** if they want to use the Beacon perimeter overlay with **H**.
 
 | Setup               | What works                                                                                  |
 | ------------------- | ------------------------------------------------------------------------------------------- |
@@ -69,6 +65,12 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 
 The table below lists the current **2.0.x** downloads.
 
+> [!WARNING]
+> Most v1.0 files were archived because they had a multiplayer-only issue where the Beacon x3 range was not applied correctly.
+> Singleplayer was not affected.
+> The v1.0 file for Minecraft **26.1.2** remains available because that issue was fixed there.
+> If you still need v1.x, use the links below. Other archived v1.0 files are intentionally not listed to avoid accidental downloads.
+
 | Version            | NeoForge | Forge | Fabric |
 | ------------------ | :------: | :---: | :----: |
 | [1.21.1][1.21.1]   |    ✅    |  ✅   |   ✅   |
@@ -87,21 +89,8 @@ The table below lists the current **2.0.x** downloads.
 | [26.1.2][26.1.2]   |    ✅    |  ✅   |   ✅   |
 | [26.2][26.2]       |    ✅    |  ✅   |   ✅   |
 
-### Legacy 1.x
-
-> [!IMPORTANT]
-> Most v1.0 files were archived because they had a multiplayer-only issue where the Beacon x3 range was not applied correctly.
-> Singleplayer was not affected.
-> The v1.0 file for Minecraft **26.1.2** remains available because that issue was fixed there.
-> If you still need v1.x, use the links below. Other archived v1.0 files are intentionally not listed to avoid accidental downloads.
-
-| Minecraft version | Status                       | Downloads                                                                   |
-| ----------------- | ---------------------------- | --------------------------------------------------------------------------- |
-| [1.21.1][1.21.1]  | Archived v1.0 files          | [NeoForge][v1_neo_1.21.1] / [Forge][v1_for_1.21.1] / [Fabric][v1_fa_1.21.1] |
-| [26.1.2][26.1.2]  | v1.0 multiplayer issue fixed | Use the regular [26.1.2 files page][26.1.2]                                 |
-
 <p align="center">
-✨ <strong>Made with ❤️ for the Minecraft Community</strong> ✨
+ Made with ❤️ for the <strong>Minecraft Community</strong>
 </p>
 
 [1.21.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=1.21.1
@@ -118,9 +107,3 @@ The table below lists the current **2.0.x** downloads.
 [26.1.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.1
 [26.1.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.2
 [26.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.2
-
-<!--  -->
-
-[v1_neo_1.21.1]: https://edge.forgecdn.net/files/7630/20/extendedbeaconrange-1.0.jar
-[v1_for_1.21.1]: https://edge.forgecdn.net/files/7697/368/Extended%20Beacon%20Range-forge-1.21.1-1.0.0.jar
-[v1_fa_1.21.1]: https://edge.forgecdn.net/files/7697/376/extendedbeaconrange-fabric-1.21.1-1.0.0.jar
