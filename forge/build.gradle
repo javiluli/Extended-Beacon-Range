@@ -1,9 +1,13 @@
 plugins {
     id 'multiloader-loader'
-    id 'net.minecraftforge.gradle' version '[7.0.20,)'
+    id 'net.minecraftforge.gradle' version '7.0.40'
 }
 base {
     archivesName = "${mod_id}-forge-${minecraft_version}"
+}
+
+tasks.named('jar', Jar) {
+    manifest.attributes('MixinConfigs': "${mod_id}.mixins.json,${mod_id}.forge.mixins.json")
 }
 
 minecraft {

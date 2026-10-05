@@ -32,7 +32,7 @@ public final class BeaconAreaRenderer {
 	 * Tipo de renderizado usado por las paredes translucidas del perimetro.
 	 *
 	 * <p>
-	 * Minecraft 26.2 mueve la geometria del nivel al sistema de {@code SubmitNodeCollector}. Usamos el tipo vanilla de debug quads porque
+	 * Minecraft 26.3 usa el sistema de {@code SubmitNodeCollector} para la geometria del nivel. Usamos el tipo vanilla de debug quads porque
 	 * mantiene posicion/color, mezcla translucida, ordenacion en subida y profundidad normal contra bloques solidos.
 	 * </p>
 	 */

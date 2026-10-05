@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Conecta el renderer del nivel vanilla con el overlay client-side de beacons.
  *
  * <p>
- * Minecraft 26.2 envia la geometria del nivel a {@code SubmitNodeCollector}. Inyectamos el overlay antes de cerrar los gizmos vanilla para
+	 * Minecraft 26.3 envia la geometria del nivel a {@code SubmitNodeCollector}. Inyectamos el overlay antes de cerrar los gizmos vanilla para
  * que las paredes del beacon entren en la misma fase translucida que el resto de geometria personalizada.
  * </p>
  */

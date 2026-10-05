@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.platform.Window;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
@@ -24,8 +23,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-
-import org.lwjgl.glfw.GLFW;
 
 /**
  * Gestiona el estado del overlay y los atajos para mostrar u ocultar perimetros concretos.
@@ -44,8 +41,8 @@ public final class BeaconOverlayToggle {
 	 * pero exponemos {@code H} como tecla principal configurable para funcionar igual en Fabric, Forge y NeoForge sin dependencias extra.
 	 * </p>
 	 */
-	private static final KeyMapping TOGGLE_OVERLAY_KEY = new KeyMapping(TOGGLE_KEY_TRANSLATION, InputConstants.Type.KEYSYM,
-			GLFW.GLFW_KEY_H, KEY_CATEGORY);
+	private static final KeyMapping TOGGLE_OVERLAY_KEY = new KeyMapping(TOGGLE_KEY_TRANSLATION, InputConstants.Type.KEYBOARD,
+			InputConstants.KEY_H, KEY_CATEGORY);
 	/**
 	 * Beacons seleccionados por el jugador para renderizar su perimetro.
 	 *
@@ -97,7 +94,7 @@ public final class BeaconOverlayToggle {
 	 * Registra el keybind en las opciones del cliente para que aparezca en la pantalla de Controles.
 	 *
 	 * <p>
-	 * Se llama desde el mixin de {@link Options#load(boolean)} para que el keybind exista antes de procesar {@code options.txt}. Asi aparece
+	 * Se llama desde el mixin de {@link Options#load()} para que el keybind exista antes de procesar {@code options.txt}. Asi aparece
 	 * en la pantalla de Controles desde el menu principal y conserva la tecla personalizada entre reinicios.
 	 * </p>
 	 *
@@ -153,10 +150,9 @@ public final class BeaconOverlayToggle {
 			toggledByConfigurableKey = true;
 		}
 
-		Window window = minecraft.getWindow();
-		boolean controlDown = InputConstants.isKeyDown(window, GLFW.GLFW_KEY_LEFT_CONTROL)
-				|| InputConstants.isKeyDown(window, GLFW.GLFW_KEY_RIGHT_CONTROL);
-		boolean shortcutDown = controlDown && InputConstants.isKeyDown(window, GLFW.GLFW_KEY_H);
+		boolean controlDown = InputConstants.isKeyDown(InputConstants.KEY_LCONTROL)
+				|| InputConstants.isKeyDown(InputConstants.KEY_RCONTROL);
+		boolean shortcutDown = controlDown && InputConstants.isKeyDown(InputConstants.KEY_H);
 		if (shortcutDown && !toggleShortcutWasDown && !toggledByConfigurableKey) {
 			toggleTargetedBeaconOrClearAll(minecraft);
 		}
