@@ -88,6 +88,7 @@ The table below lists the current **2.0.x** downloads.
 | [26.1.1][26.1.1]   |    ✅    |  ✅   |   ✅   |
 | [26.1.2][26.1.2]   |    ✅    |  ✅   |   ✅   |
 | [26.2][26.2]       |    ✅    |  ✅   |   ✅   |
+| [26.3][26.3]       |    ✅    |  ✅   |   ✅   |
 
 <p align="center">
  Made with ❤️ for the <strong>Minecraft Community</strong>
@@ -107,3 +108,4 @@ The table below lists the current **2.0.x** downloads.
 [26.1.1]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.1
 [26.1.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.1.2
 [26.2]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.2
+[26.3]: https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range/files/all?version=26.3
