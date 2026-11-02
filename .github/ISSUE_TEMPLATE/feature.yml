@@ -1,0 +1,15 @@
+name: "💡 Idea or feature"
+description: Suggest a feature or improvement for Extended Beacon Range.
+title: "[Idea] "
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you improve?
+      description: >
+        Explain your idea and why it would help. If it concerns a specific Minecraft version,
+        mod version or loader, include it. Add examples or images if useful.
+        English or Spanish is welcome.
+    validations:
+      required: true

@@ -12,7 +12,7 @@
 </a>
 ![Loader](https://img.shields.io/badge/Loader-NeoForge/Forge/Fabric-E65100?style=for-the-badge&logo=forge&logoColor=white)
 ![Performance](https://img.shields.io/badge/Performance-Lightweight-00C853?style=for-the-badge)
-![Configuration](https://img.shields.io/badge/Configuration-No%20Config-455A64?style=for-the-badge)
+![Configuration](https://img.shields.io/badge/Configuration-In--game%20Settings-455A64?style=for-the-badge)
 
 </div>
 
@@ -29,6 +29,7 @@
 - ✨ Look at a Beacon and press **H** to toggle only that Beacon
 - ✨ Multiplayer range works from the server side
 - ✨ Optional client-side overlay for players who want it
+- ✨ Choose colored or white perimeters from the in-game settings screen
 
 ## 📝 Install Notes
 
@@ -41,6 +42,16 @@
 | **Singleplayer**    | Range x3 and perimeter overlay both work normally.                                          |
 | **Server only**     | Range x3 works for every player, even if they do not install the mod.                       |
 | **Server + client** | Range x3 works, and players with the mod installed can use **H** to view Beacon perimeters. |
+
+## ⚙️ Client settings (Minecraft 26.3)
+
+Open **Options → Video Settings** and scroll to the **Extended Beacon Range** section on Fabric, Forge or NeoForge. You can also open the same settings screen from **Mods → Extended Beacon Range → Config** in Forge and NeoForge, or from **Mod Menu** in Fabric. Mod Menu and Catalogue are optional.
+
+| Setting | Default | What it does |
+| ------- | :-----: | ------------ |
+| **Colored perimeters** | ON | Gives each beacon perimeter its own color. Turn it off to show all perimeters in white. |
+
+Setting names match the English in-game menu (**Perímetros de colores** in Spanish). Changes apply and are saved immediately, with no restart needed. These settings only affect your own overlay; beacon range and other players are unaffected.
 
 ## 📏 Range Comparison
 
@@ -59,7 +70,18 @@ The effect radius of every Beacon pyramid level is multiplied by **x3**.
 
 🟥 **Vanilla** area **_vs_** 🟪 **Extended Beacon Range** area
 
-![Range Comparison](./public/examples/all-ranges.png)
+<table>
+   <tr>
+      <td><img src="./public/examples/all-ranges.png" alt="All ranges" /></td>
+      <td><img src="./public/examples/perimeter_1.png" alt="Example #1" /></td>
+      <td><img src="./public/examples/perimeter_2.png" alt="Example #2" /></td>
+   </tr>
+   <tr>
+      <td><img src="./public/examples/perimeter_3.png" alt="Example #3" /></td>
+      <td><img src="./public/examples/perimeter_4.png" alt="Example #4" /></td>
+      <td><img src="./public/examples/perimeter_5.png" alt="Example #5" /></td>
+   </tr>
+</table>
 
 ## 🛠️ Minecraft version and loader compatibility
 

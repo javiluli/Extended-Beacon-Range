@@ -1,0 +1,72 @@
+name: "🐛 Bug or crash"
+description: Report a problem with any released version of Extended Beacon Range.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem, what you expected and how to reproduce it. English or Spanish is welcome.
+    validations:
+      required: true
+  - type: dropdown
+    id: minecraft_version
+    attributes:
+      label: Minecraft version
+      description: Choose the version where the problem happens, even if it is an older release. For Other, specify it above.
+      options:
+        - "1.21.1"
+        - "1.21.3"
+        - "1.21.4"
+        - "1.21.5"
+        - "1.21.6"
+        - "1.21.7"
+        - "1.21.8"
+        - "1.21.9"
+        - "1.21.10"
+        - "1.21.11"
+        - "26.1"
+        - "26.1.1"
+        - "26.1.2"
+        - "26.2"
+        - "26.3"
+    validations:
+      required: true
+  - type: input
+    id: mod_version
+    attributes:
+      label: Extended Beacon Range version
+      description: Copy the exact mod version or JAR filename. If client and server use different versions, include both.
+      placeholder: extendedbeaconrange-fabric-1.21.9-2.0.0.jar
+    validations:
+      required: true
+  - type: input
+    id: loader
+    attributes:
+      label: Loader and version
+      description: Fabric, Forge or NeoForge, including its exact version from your launcher.
+      placeholder: Fabric Loader 0.19.5
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Where does it happen?
+      description: For multiplayer, indicate where Extended Beacon Range is installed.
+      options:
+        - "Singleplayer"
+        - "Multiplayer - mod on the server only"
+        - "Multiplayer - mod on my client only"
+        - "Multiplayer - mod on both server and client"
+        - "Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, screenshots or other mods (optional)
+      description: >
+        For crashes, attach the relevant file from crash-reports or logs/latest.log if available.
+        For other problems, screenshots and relevant other mods can help.
+        Remove private information before sharing.

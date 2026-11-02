@@ -17,3 +17,7 @@ Fabric, Forge and NeoForge.
 ### Bug Fixes
 
 - fix: display mod icons, descriptions and project links correctly
+
+### Maintenance and Documentation
+
+- docs: simplify player settings and version-specific issue reports
