@@ -21,3 +21,4 @@ Fabric, Forge and NeoForge.
 ### Maintenance and Documentation
 
 - docs: simplify player settings and version-specific issue reports
+- build: add isolated client runs with optional mod menus

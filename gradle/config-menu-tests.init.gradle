@@ -1,0 +1,38 @@
+// Optional menus belong only to these isolated development runs, never to the release JARs.
+gradle.beforeProject { project ->
+    project.afterEvaluate {
+        def testDirectory = project.layout.buildDirectory.dir('config-menu-test').get().asFile
+        switch (project.name) {
+            case 'fabric':
+                project.dependencies.add('runtimeOnly', 'com.terraformersmc:modmenu:21.0.0') {
+                    transitive = false
+                }
+                project.loom.runs.client {
+                    runDir(testDirectory.absolutePath)
+                }
+                break
+            case 'neoforge':
+                project.repositories.ivy {
+                    name = 'CatalogueTestRelease'
+                    url = 'https://github.com/MrCrayfish/Catalogue/releases/download'
+                    patternLayout {
+                        artifact 'v[revision]/[artifact]-[revision]-signed.[ext]'
+                    }
+                    metadataSources { artifact() }
+                    content { includeGroup 'menu-tests' }
+                }
+                project.dependencies.add('runtimeOnly', 'menu-tests:catalogue-neoforge:1.12.3+26.3@jar') {
+                    transitive = false
+                }
+                project.neoForge.runs.client {
+                    gameDirectory = testDirectory
+                }
+                break
+            case 'forge':
+                project.minecraft.runs.client {
+                    workingDir = testDirectory
+                }
+                break
+        }
+    }
+}

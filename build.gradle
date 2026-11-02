@@ -87,3 +87,39 @@ tasks.register('NeoForge_runServer') {
     description = 'Run NeoForge server'
     dependsOn ':neoforge:runServer'
 }
+
+tasks.register('FabricWitchMods', Exec) {
+    group = 'dev-run'
+    description = 'Run Fabric client with config menu tests'
+    workingDir = rootProject.projectDir
+    commandLine(
+        'cmd', '/c',
+        'gradlew.bat',
+        '-I', 'gradle/config-menu-tests.init.gradle',
+        ':fabric:runClient'
+    )
+}
+
+tasks.register('NeoForgeWitchMods', Exec) {
+    group = 'dev-run'
+    description = 'Run NeoForge client with config menu tests'
+    workingDir = rootProject.projectDir
+    commandLine(
+        'cmd', '/c',
+        'gradlew.bat',
+        '-I', 'gradle/config-menu-tests.init.gradle',
+        ':neoForge:runClient'
+    )
+}
+
+tasks.register('ForgeWitchMods', Exec) {
+    group = 'dev-run'
+    description = 'Run Forge client with config menu tests'
+    workingDir = rootProject.projectDir
+    commandLine(
+        'cmd', '/c',
+        'gradlew.bat',
+        '-I', 'gradle/config-menu-tests.init.gradle',
+        ':forge:runClient'
+    )
+}
