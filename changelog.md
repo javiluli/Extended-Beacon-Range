@@ -19,6 +19,7 @@ Fabric, Forge and NeoForge.
 - fix: display mod icons, descriptions and project links correctly
 - fix: hide beacon perimeters while their beams are blocked
 - fix: translate perimeter toggle notifications into English and Spanish
+- fix: update resource pack metadata for Minecraft 26.3
 
 ### Maintenance and Documentation
 
