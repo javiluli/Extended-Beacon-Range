@@ -23,16 +23,16 @@ public final class BeaconConfigScreen extends OptionsSubScreen {
 		}
 	}
 
-	/** Reutiliza las mismas opciones en esta pantalla y en Video Settings. */
+	/** Reutiliza las mismas opciones en dos columnas en esta pantalla y en Video Settings. */
 	public static void addOptionsTo(OptionsList list, Screen parent) {
 		BeaconClientConfig config = BeaconClientConfig.get();
-		list.addBig(OptionInstance.createBoolean("config.extendedbeaconrange.colorVisualPerimeter",
+		list.addSmall(OptionInstance.createBoolean("config.extendedbeaconrange.colorVisualPerimeter",
 				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.colorVisualPerimeter.tooltip")),
 				config.colorVisualPerimeter, value -> {
 					config.colorVisualPerimeter = value;
 					save(config, parent);
-				}));
-		list.addBig(OptionInstance.createBoolean("config.extendedbeaconrange.showEffectTimers",
+				}),
+				OptionInstance.createBoolean("config.extendedbeaconrange.showEffectTimers",
 				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.showEffectTimers.tooltip")),
 				config.showEffectTimers, value -> {
 					config.showEffectTimers = value;
