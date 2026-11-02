@@ -75,5 +75,13 @@ class BeaconEffectCoverageTest {
 		assertFalse(BeaconEffectHud.supports(new MobEffectInstance(MobEffects.NIGHT_VISION, 100)));
 	}
 
+	@Test
+	void clientOnlyDoesNotAssumeTheServerHasExtendedRange() {
+		BlockPos pos = new BlockPos(0, 64, 0);
+		AABB outsideVanilla = new AABB(100, 64, 0, 100.6, 65.8, .6);
+		assertFalse(BeaconEffectHud.intersectsRange(pos, BeaconRange.effectRadius(4, false), 384, outsideVanilla));
+		assertTrue(BeaconEffectHud.intersectsRange(pos, BeaconRange.effectRadius(4, true), 384, outsideVanilla));
+		assertFalse(BeaconEffectHud.intersectsRange(pos, 0, 384, new AABB(pos)));
+	}
 
 }

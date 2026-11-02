@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
@@ -65,13 +66,18 @@ public final class BeaconEffectHud {
 				int levels = data.extendedbeaconrange$getLevels();
 				if (beacon.getBeamSections().isEmpty() || !maintains(effect, levels,
 						data.extendedbeaconrange$getPrimaryPower(), data.extendedbeaconrange$getSecondaryPower())) { continue; }
-				AABB area = new AABB(beacon.getBlockPos()).inflate(BeaconRange.effectRadius(levels))
-						.expandTowards(0, level.getHeight(), 0);
-				if (area.intersects(player.getBoundingBox())) { maintained = true; break; }
+				boolean extended = ((BeaconRange.Source) beacon).extendedbeaconrange$usesExtendedRange();
+				if (intersectsRange(beacon.getBlockPos(), BeaconRange.effectRadius(levels, extended),
+						level.getHeight(), player.getBoundingBox())) { maintained = true; break; }
 			}
 			timers.computeIfAbsent(effect.getEffect(), key -> new EffectCountdown())
 					.update(effect.getDuration(), effect.getAmplifier(), maintained, level.tickRateManager().tickrate());
 		}
+	}
+
+	/** Comprueba el volumen vanilla con el radio anunciado por el servidor. */
+	static boolean intersectsRange(BlockPos pos, int radius, int worldHeight, AABB bounds) {
+		return radius > 0 && new AABB(pos).inflate(radius).expandTowards(0, worldHeight, 0).intersects(bounds);
 	}
 
 	/** Comprueba el nivel activo y limita la cobertura al intervalo de renovacion vanilla. */

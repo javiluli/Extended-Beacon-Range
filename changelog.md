@@ -21,6 +21,7 @@ Fabric, Forge and NeoForge.
 - fix: hide beacon perimeters while their beams are blocked
 - fix: translate perimeter toggle notifications into English and Spanish
 - fix: update resource pack metadata for Minecraft 26.3
+- fix: respect server beacon ranges when detecting effect coverage
 
 ### Maintenance and Documentation
 

@@ -63,7 +63,7 @@ Your settings only affect your own overlay; beacon range and other players are u
 
 The HUD shows levels and a blue border that darkens clockwise as beacon effects run out. While a loaded beacon maintains the active level, the border stays full and the timer is hidden. A weaker beacon does not hide the countdown for a stronger effect. Inventory effect panels are unchanged.
 
-This applies to Speed, Haste, Resistance, Jump Boost, Strength and Regeneration, including those obtained from potions. Minecraft does not send the effect's source: if beacon coverage cannot be confirmed, the HUD shows the server's remaining duration. With the mod on the server, changes to beacon powers are also synchronized; with a client-only installation, coverage detection can be incomplete.
+This applies to Speed, Haste, Resistance, Jump Boost, Strength and Regeneration, including those obtained from potions. Minecraft does not send the effect's source: if beacon coverage cannot be confirmed, the HUD shows the server's remaining duration. Servers with this version of the mod also announce the extended range and synchronize changes to beacon powers. Other servers use the vanilla range for HUD coverage checks; detection can be incomplete if they run an older version or change beacon behavior.
 
 ## 📏 Range Comparison
 

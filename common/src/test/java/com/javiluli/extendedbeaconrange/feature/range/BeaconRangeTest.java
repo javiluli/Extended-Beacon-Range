@@ -14,4 +14,13 @@ class BeaconRangeTest {
 		assertEquals(60.0, BeaconRange.extend(20.0));
 		assertEquals(150.0, BeaconRange.extend(50.0));
 	}
+
+	@Test
+	void unannouncedServersUseVanillaRangeForEveryPyramidLevel() {
+		assertEquals(0, BeaconRange.effectRadius(0, false));
+		for (int levels = 1; levels <= 4; levels++) {
+			assertEquals((levels + 1) * 10, BeaconRange.effectRadius(levels, false));
+			assertEquals(BeaconRange.effectRadius(levels), BeaconRange.effectRadius(levels, true));
+		}
+	}
 }
