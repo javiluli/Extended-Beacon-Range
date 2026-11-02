@@ -31,6 +31,7 @@ body:
         - "26.1.2"
         - "26.2"
         - "26.3"
+        - "Other (specify above)"
     validations:
       required: true
   - type: input
@@ -38,7 +39,7 @@ body:
     attributes:
       label: Extended Beacon Range version
       description: Copy the exact mod version or JAR filename. If client and server use different versions, include both.
-      placeholder: extendedbeaconrange-fabric-1.21.9-2.0.0.jar
+      placeholder: extendedbeaconrange-fabric-26.3-2.1.0.jar
     validations:
       required: true
   - type: input
