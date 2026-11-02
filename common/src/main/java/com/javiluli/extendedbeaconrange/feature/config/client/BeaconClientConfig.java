@@ -30,6 +30,8 @@ public final class BeaconClientConfig {
 	private boolean readFailed;
 	/** Usa la paleta por beacon; false muestra todos los perimetros en blanco. */
 	public boolean colorVisualPerimeter = true;
+	/** Iguala el perimetro al color final del rayo; false conserva la paleta por posicion. */
+	public boolean colorMatchBeaconPerimeter = false;
 	/** Muestra el tiempo restante debajo de los efectos de beacon del HUD. */
 	public boolean showEffectTimers = true;
 
@@ -56,8 +58,10 @@ public final class BeaconClientConfig {
 			}
 			values = root.getAsJsonObject();
 			boolean color = readBoolean("colorVisualPerimeter", true);
+			boolean matchBeam = readBoolean("colorMatchBeaconPerimeter", false);
 			boolean timers = readBoolean("showEffectTimers", true);
 			colorVisualPerimeter = color;
+			colorMatchBeaconPerimeter = matchBeam;
 			showEffectTimers = timers;
 		} catch (IOException | JsonParseException e) {
 			// Preserve unreadable or invalid files instead of replacing the user's settings with defaults.
@@ -86,6 +90,7 @@ public final class BeaconClientConfig {
 			Files.createDirectories(file.toAbsolutePath().getParent());
 			temporary = Files.createTempFile(file.toAbsolutePath().getParent(), "extendedbeaconrange-", ".tmp");
 			values.addProperty("colorVisualPerimeter", colorVisualPerimeter);
+			values.addProperty("colorMatchBeaconPerimeter", colorMatchBeaconPerimeter);
 			values.addProperty("showEffectTimers", showEffectTimers);
 			try (Writer writer = Files.newBufferedWriter(temporary)) {
 				GSON.toJson(values, writer);

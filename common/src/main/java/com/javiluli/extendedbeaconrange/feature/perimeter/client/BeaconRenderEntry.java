@@ -9,7 +9,7 @@ import com.javiluli.extendedbeaconrange.feature.perimeter.client.BeaconOverlayCo
  *
  * @param position posicion absoluta del beacon.
  * @param radius radio efectivo ya calculado.
- * @param color color unico calculado desde su posicion X/Z.
+ * @param color color del rayo, de la paleta por posicion o blanco, segun las opciones del cliente.
  * @param bounds volumen de descarte desde la Y minima de la dimension.
  */
 public record BeaconRenderEntry(BlockPos position, int radius, OverlayColor color, AABB bounds) {

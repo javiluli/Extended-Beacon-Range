@@ -1,9 +1,12 @@
 package com.javiluli.extendedbeaconrange.feature.perimeter.client;
 
 import java.util.stream.IntStream;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
+import org.jspecify.annotations.Nullable;
 
 /**
- * Genera colores intensos y estables para diferenciar beacons cercanos por posicion X/Z.
+ * Usa el color nativo del rayo o una paleta estable por posicion X/Z.
  */
 public final class BeaconOverlayColors {
 	private static final OverlayColor WHITE = new OverlayColor(1.0f, 1.0f, 1.0f);
@@ -13,6 +16,19 @@ public final class BeaconOverlayColors {
 			.toArray(OverlayColor[]::new);
 
 	private BeaconOverlayColors() {
+	}
+
+	/** El blanco tiene prioridad; reutiliza el color anterior si el tramo superior del rayo no cambia. */
+	public static OverlayColor getColor(BeaconBlockEntity beacon, boolean colored, boolean matchBeam, @Nullable OverlayColor previous) {
+		if (!colored || !matchBeam) {
+			return getPositionColor(beacon.getBlockPos().getX(), beacon.getBlockPos().getZ(), colored);
+		}
+		var sections = beacon.getBeamSections();
+		if (sections.isEmpty()) { return WHITE; }
+		int color = sections.getLast().getColor();
+		float red = ARGB.redFloat(color), green = ARGB.greenFloat(color), blue = ARGB.blueFloat(color);
+		return previous != null && previous.red() == red && previous.green() == green && previous.blue() == blue
+				? previous : new OverlayColor(red, green, blue);
 	}
 
 	/**

@@ -7,6 +7,8 @@
   "config.extendedbeaconrange.section": "Extended Beacon Range",
   "config.extendedbeaconrange.colorVisualPerimeter": "Colored perimeters",
   "config.extendedbeaconrange.colorVisualPerimeter.tooltip": "Assign a color to each beacon perimeter. When disabled, all perimeters are white. Changes apply immediately.",
+  "config.extendedbeaconrange.colorMatchBeaconPerimeter": "Match beam color",
+  "config.extendedbeaconrange.colorMatchBeaconPerimeter.tooltip": "Use the color of the beam's top section, including mixed stained glass colors. Without stained glass, the perimeter is white. When disabled, colors are assigned by beacon position. Requires colored perimeters. Changes apply when the beam updates; the beam itself is unchanged.",
   "config.extendedbeaconrange.showEffectTimers": "Effect timers",
   "config.extendedbeaconrange.showEffectTimers.tooltip": "Show the remaining time below beacon-effect icons in the HUD. Timers are hidden while a nearby beacon maintains the current effect level. The border countdown and effect levels are always shown. Inventory effects are unchanged.",
   "config.extendedbeaconrange.save_failed": "Could not save beacon settings",

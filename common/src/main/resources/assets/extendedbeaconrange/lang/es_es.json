@@ -7,6 +7,8 @@
   "config.extendedbeaconrange.section": "Extended Beacon Range",
   "config.extendedbeaconrange.colorVisualPerimeter": "Perímetros de colores",
   "config.extendedbeaconrange.colorVisualPerimeter.tooltip": "Asigna un color a cada perímetro. Al desactivarlo, todos los perímetros se muestran en blanco. Los cambios se aplican al instante.",
+  "config.extendedbeaconrange.colorMatchBeaconPerimeter": "Igualar color al rayo",
+  "config.extendedbeaconrange.colorMatchBeaconPerimeter.tooltip": "Usa el color del tramo superior del rayo, incluidas las mezclas de cristales tintados. Sin cristal tintado, el perímetro es blanco. Al desactivarlo, los colores se asignan por posición. Requiere perímetros de colores. Los cambios se reflejan cuando se actualiza el rayo; el rayo no se modifica.",
   "config.extendedbeaconrange.showEffectTimers": "Temporizadores de efectos",
   "config.extendedbeaconrange.showEffectTimers.tooltip": "Muestra el tiempo restante debajo de los efectos de beacon del HUD. El contador se oculta mientras un beacon cercano mantiene el nivel actual del efecto. El borde de duración y los niveles siempre se muestran. Los efectos del inventario no cambian.",
   "config.extendedbeaconrange.save_failed": "No se pudo guardar la configuración",

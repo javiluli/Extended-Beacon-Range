@@ -71,7 +71,7 @@ public final class BeaconAreaCollector {
 		}
 		boolean changed = prepared.keySet().removeIf(pos -> !selection.positions.contains(pos));
 		var iterator = selection.positions.iterator();
-		boolean colored = BeaconClientConfig.get().colorVisualPerimeter;
+		BeaconClientConfig config = BeaconClientConfig.get();
 		int minY = level.dimensionType().minY();
 		int maxY = minY + level.dimensionType().height();
 		while (iterator.hasNext()) {
@@ -89,8 +89,9 @@ public final class BeaconAreaCollector {
 				changed |= prepared.remove(pos) != null;
 				continue;
 			}
-			var color = BeaconOverlayColors.getPositionColor(pos.getX(), pos.getZ(), colored);
 			BeaconRenderEntry old = prepared.get(pos);
+			var color = BeaconOverlayColors.getColor(beacon, config.colorVisualPerimeter, config.colorMatchBeaconPerimeter,
+					old == null ? null : old.color());
 			if (old == null || old.radius() != radius || !old.color().equals(color)) {
 				prepared.put(pos, BeaconRenderEntry.create(pos, radius, color, minY, maxY));
 				changed = true;

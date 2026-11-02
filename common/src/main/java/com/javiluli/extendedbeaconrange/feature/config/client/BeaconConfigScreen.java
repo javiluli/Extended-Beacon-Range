@@ -26,18 +26,29 @@ public final class BeaconConfigScreen extends OptionsSubScreen {
 	/** Reutiliza las mismas opciones en dos columnas en esta pantalla y en Video Settings. */
 	public static void addOptionsTo(OptionsList list, Screen parent) {
 		BeaconClientConfig config = BeaconClientConfig.get();
+		var matchBeam = OptionInstance.createBoolean("config.extendedbeaconrange.colorMatchBeaconPerimeter",
+				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.colorMatchBeaconPerimeter.tooltip")),
+				config.colorMatchBeaconPerimeter, value -> {
+					config.colorMatchBeaconPerimeter = value;
+					save(config, parent);
+				});
 		list.addSmall(OptionInstance.createBoolean("config.extendedbeaconrange.colorVisualPerimeter",
 				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.colorVisualPerimeter.tooltip")),
 				config.colorVisualPerimeter, value -> {
 					config.colorVisualPerimeter = value;
+					var button = list.findOption(matchBeam);
+					if (button != null) { button.active = value; }
 					save(config, parent);
 				}),
+				matchBeam,
 				OptionInstance.createBoolean("config.extendedbeaconrange.showEffectTimers",
 				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.showEffectTimers.tooltip")),
 				config.showEffectTimers, value -> {
 					config.showEffectTimers = value;
 					save(config, parent);
 				}));
+		var button = list.findOption(matchBeam);
+		if (button != null) { button.active = config.colorVisualPerimeter; }
 	}
 
 	/** Conserva el aviso de error para todas las opciones de la pantalla. */

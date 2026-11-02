@@ -11,6 +11,7 @@ Minecraft 26.3 - Fabric, Forge and NeoForge.
 - Share client settings across video settings and mod menus
 - Show beacon effect levels and countdowns on the HUD
 - Arrange client settings in two columns
+- Match perimeter colors to the beacon beam (disabled by default)
 
 #### Optimizations
 
