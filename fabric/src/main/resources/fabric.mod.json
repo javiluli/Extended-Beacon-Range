@@ -16,6 +16,9 @@
     "entrypoints": {
         "main": [
             "com.javiluli.extendedbeaconrange.ExtendedBeaconRange"
+        ],
+        "modmenu": [
+            "com.javiluli.extendedbeaconrange.feature.config.client.ModMenuIntegration"
         ]
     },
     "mixins": [

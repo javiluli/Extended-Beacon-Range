@@ -1,4 +1,10 @@
 {
   "key.category.extendedbeaconrange.controls": "Extended Beacon Range",
-  "key.extendedbeaconrange.toggle_overlay": "Toggle targeted beacon perimeter"
+  "key.extendedbeaconrange.toggle_overlay": "Toggle targeted beacon perimeter",
+  "config.extendedbeaconrange.title": "Extended Beacon Range Settings",
+  "config.extendedbeaconrange.section": "Extended Beacon Range",
+  "config.extendedbeaconrange.colorVisualPerimeter": "Colored perimeters",
+  "config.extendedbeaconrange.colorVisualPerimeter.tooltip": "Assign a color to each beacon perimeter. When disabled, all perimeters are white. Changes apply immediately.",
+  "config.extendedbeaconrange.save_failed": "Could not save beacon settings",
+  "config.extendedbeaconrange.save_failed.description": "Changes apply for this session but could not be saved. Check that config/extendedbeaconrange-client.json is valid and writable, then restart the game. The existing file has been preserved."
 }

@@ -12,6 +12,7 @@
     "perimeter.client.BeaconBlockEntityAccessor",
     "perimeter.client.OptionsAccessor",
     "client.OptionsLoadMixin",
+    "config.client.VideoSettingsScreenMixin",
     "perimeter.client.LevelRendererMixin"
   ],
   "server": [],

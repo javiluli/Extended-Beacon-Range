@@ -1,6 +1,7 @@
 package com.javiluli.extendedbeaconrange.mixin.client;
 
 import com.javiluli.extendedbeaconrange.feature.perimeter.client.BeaconOverlayToggle;
+import com.javiluli.extendedbeaconrange.feature.config.client.BeaconClientConfig;
 
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,6 +26,7 @@ public class OptionsLoadMixin {
 	 */
 	@Inject(method = "load", at = @At("HEAD"))
 	private void extendedbeaconrange$registerBeaconOverlayKey(CallbackInfo ci) {
+		BeaconClientConfig.get();
 		BeaconOverlayToggle.registerKeyMapping((Options) (Object) this);
 	}
 }

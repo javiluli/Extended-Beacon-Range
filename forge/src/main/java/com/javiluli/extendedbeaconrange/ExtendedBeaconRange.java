@@ -1,6 +1,11 @@
 package com.javiluli.extendedbeaconrange;
 
+import com.javiluli.extendedbeaconrange.feature.config.client.BeaconConfigScreen;
+import net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 /**
  * Punto de entrada de Forge.
@@ -13,8 +18,18 @@ import net.minecraftforge.fml.common.Mod;
 public class ExtendedBeaconRange {
 
 	/**
-	 * Inicializa el entrypoint de Forge. Actualmente no requiere registro adicional.
+	 * Registra la pantalla de configuracion solo en el cliente fisico.
 	 */
-	public ExtendedBeaconRange() {
+	public ExtendedBeaconRange(FMLJavaModLoadingContext context) {
+		if (FMLEnvironment.dist == Dist.CLIENT) {
+			ClientConfig.register(context);
+		}
+	}
+
+	private static final class ClientConfig {
+		private static void register(FMLJavaModLoadingContext context) {
+			context.registerExtensionPoint(ConfigScreenFactory.class,
+					() -> new ConfigScreenFactory(BeaconConfigScreen::new));
+		}
 	}
 }

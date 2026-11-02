@@ -6,6 +6,10 @@
 
 Fabric, Forge and NeoForge.
 
+### Features
+
+- feat: share client settings across video settings and mod menus
+
 ### Optimizations
 
 - refactor: organize beacon features and optimize perimeter rendering

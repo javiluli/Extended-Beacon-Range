@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.javiluli.extendedbeaconrange.feature.config.client.BeaconClientConfig;
 import com.javiluli.extendedbeaconrange.feature.range.BeaconRange;
 import com.javiluli.extendedbeaconrange.mixin.perimeter.client.BeaconBlockEntityAccessor;
 import net.minecraft.client.Minecraft;
@@ -70,7 +71,7 @@ public final class BeaconAreaCollector {
 		}
 		boolean changed = prepared.keySet().removeIf(pos -> !selection.positions.contains(pos));
 		var iterator = selection.positions.iterator();
-		boolean colored = true;
+		boolean colored = BeaconClientConfig.get().colorVisualPerimeter;
 		int minY = level.dimensionType().minY();
 		int maxY = minY + level.dimensionType().height();
 		while (iterator.hasNext()) {

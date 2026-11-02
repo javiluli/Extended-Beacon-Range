@@ -1,0 +1,10 @@
+{
+  "key.category.extendedbeaconrange.controls": "Extended Beacon Range",
+  "key.extendedbeaconrange.toggle_overlay": "Alternar perímetro del beacon seleccionado",
+  "config.extendedbeaconrange.title": "Configuración de Extended Beacon Range",
+  "config.extendedbeaconrange.section": "Extended Beacon Range",
+  "config.extendedbeaconrange.colorVisualPerimeter": "Perímetros de colores",
+  "config.extendedbeaconrange.colorVisualPerimeter.tooltip": "Asigna un color a cada perímetro. Al desactivarlo, todos los perímetros se muestran en blanco. Los cambios se aplican al instante.",
+  "config.extendedbeaconrange.save_failed": "No se pudo guardar la configuración",
+  "config.extendedbeaconrange.save_failed.description": "Los cambios se aplican durante esta sesión, pero no se han podido guardar. Comprueba que config/extendedbeaconrange-client.json sea válido y se pueda escribir en él, y reinicia el juego. Se ha conservado el archivo existente."
+}
