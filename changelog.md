@@ -17,6 +17,7 @@ Fabric, Forge and NeoForge.
 ### Bug Fixes
 
 - fix: display mod icons, descriptions and project links correctly
+- fix: hide beacon perimeters while their beams are blocked
 
 ### Maintenance and Documentation
 

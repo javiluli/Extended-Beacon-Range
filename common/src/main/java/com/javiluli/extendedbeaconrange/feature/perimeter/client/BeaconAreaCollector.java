@@ -83,7 +83,8 @@ public final class BeaconAreaCollector {
 				changed |= prepared.remove(pos) != null;
 				continue;
 			}
-			int radius = BeaconRange.effectRadius(((BeaconBlockEntityAccessor) beacon).extendedbeaconrange$getLevels());
+			int radius = hasEffectiveRange(beacon)
+					? BeaconRange.effectRadius(((BeaconBlockEntityAccessor) beacon).extendedbeaconrange$getLevels()) : 0;
 			if (radius <= 0) {
 				changed |= prepared.remove(pos) != null;
 				continue;
@@ -113,8 +114,8 @@ public final class BeaconAreaCollector {
 		return level.getChunkSource().getChunk(x, z, ChunkStatus.FULL, false);
 	}
 
-	/** Lee el nivel efectivo sin repetir la formula de radios. */
+	/** La lista vanilla queda vacia si no hay piramide o si el rayo esta bloqueado. */
 	public static boolean hasEffectiveRange(BeaconBlockEntity beacon) {
-		return ((BeaconBlockEntityAccessor) beacon).extendedbeaconrange$getLevels() > 0;
+		return !beacon.getBeamSections().isEmpty();
 	}
 }
