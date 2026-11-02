@@ -29,6 +29,7 @@ Minecraft 26.3 - Fabric, Forge and NeoForge.
 #### Other Changes
 
 - Align changelog entries with commit messages
+- Verify native beacon discovery hooks
 - Simplify player settings and version-specific issue reports
 - Add isolated client runs with optional mod menus
 - Bump the mod version to 2.1.0
