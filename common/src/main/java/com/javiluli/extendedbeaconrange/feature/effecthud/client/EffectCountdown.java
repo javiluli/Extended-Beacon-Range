@@ -9,6 +9,7 @@ final class EffectCountdown {
 	private int total;
 	private int amplifier = -1;
 	private boolean maintained;
+	private int remainingSeconds;
 	private int displayedSeconds = -1;
 	private String time = "00:00";
 	private Component level = Component.empty();
@@ -25,11 +26,7 @@ final class EffectCountdown {
 		duration = remaining;
 		amplifier = newAmplifier;
 		maintained = covered;
-		int seconds = remaining < 0 ? -1 : (int) Math.ceil(remaining / (double) tickRate);
-		if (seconds != displayedSeconds) {
-			displayedSeconds = seconds;
-			time = seconds < 0 ? "" : String.format(Locale.ROOT, "%02d:%02d", seconds / 60, seconds % 60);
-		}
+		remainingSeconds = remaining < 0 ? -1 : (int) Math.ceil(remaining / (double) tickRate);
 	}
 
 	/** Mantiene el borde completo para efectos infinitos o renovados por un beacon. */
@@ -38,7 +35,14 @@ final class EffectCountdown {
 	}
 
 	/** Solo muestra tiempo cuando representa la caducidad del nivel activo. */
-	String time() { return duration < 0 || maintained ? "" : time; }
+	String time() {
+		if (duration < 0 || maintained) { return ""; }
+		if (remainingSeconds != displayedSeconds) {
+			displayedSeconds = remainingSeconds;
+			time = String.format(Locale.ROOT, "%02d:%02d", remainingSeconds / 60, remainingSeconds % 60);
+		}
+		return time;
+	}
 
 	/** Reutiliza el nivel traducible hasta que cambie el amplificador. */
 	Component level() { return level; }

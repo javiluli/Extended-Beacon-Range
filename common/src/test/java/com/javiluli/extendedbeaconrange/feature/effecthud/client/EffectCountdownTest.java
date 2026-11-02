@@ -1,10 +1,19 @@
 package com.javiluli.extendedbeaconrange.feature.effecthud.client;
 
 import static org.junit.jupiter.api.Assertions.*;
+import net.minecraft.SharedConstants;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.server.Bootstrap;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class EffectCountdownTest {
+	@BeforeAll
+	static void bootstrapMinecraft() {
+		SharedConstants.tryDetectVersion();
+		Bootstrap.bootStrap();
+	}
+
 	@Test
 	void countsDownFromTheObservedDurationAndNeverLeavesItsBounds() {
 		EffectCountdown timer = new EffectCountdown();
@@ -74,5 +83,31 @@ class EffectCountdownTest {
 		assertEquals("00:09", timer.time());
 	}
 
+	@Test
+	void lazilyFormatsTheCurrentTimeAndReusesItUntilTheSecondChanges() {
+		EffectCountdown timer = new EffectCountdown();
+		timer.update(340, 0, false, 20);
+		String original = timer.time();
+		timer.update(339, 0, false, 20);
+		assertSame(original, timer.time());
+		timer.update(300, 0, true, 20);
+		assertEquals("", timer.time());
+		timer.update(259, 0, false, 20);
+		assertEquals("00:13", timer.time());
+		timer.update(200, 0, false, 20);
+		timer.update(100, 0, false, 20);
+		assertEquals("00:05", timer.time(), "Enabling timers later must not reveal a stale cached value");
+	}
 
+	@Test
+	void longTimersWideFontsAndHigherLevelsFitInsideTheirOwnIcon() {
+		assertEquals(.75f, BeaconEffectHud.textScale(24, 22));
+		for (int width : new int[] {0, 1, 8, 24, 32, 64, 512}) {
+			for (int available : new int[] {18, 22}) {
+				float scale = BeaconEffectHud.textScale(width, available);
+				assertTrue(scale > 0 && scale <= .75f);
+				assertTrue(width * scale <= available + .0001f);
+			}
+		}
+	}
 }

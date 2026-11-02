@@ -14,6 +14,7 @@ Fabric, Forge and NeoForge.
 ### Optimizations
 
 - refactor: organize beacon features and optimize perimeter rendering
+- perf: reduce HUD countdown work and fit labels inside their icons
 
 ### Bug Fixes
 

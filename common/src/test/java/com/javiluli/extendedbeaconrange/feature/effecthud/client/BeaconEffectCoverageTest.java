@@ -84,4 +84,24 @@ class BeaconEffectCoverageTest {
 		assertFalse(BeaconEffectHud.intersectsRange(pos, 0, 384, new AABB(pos)));
 	}
 
+	@Test
+	void allocationFreeCoverageMatchesVanillaIncludingHeightsAndTouchingEdges() {
+		for (BlockPos pos : List.of(new BlockPos(-30, -60, 25), new BlockPos(0, 64, 0), new BlockPos(18, 300, -20))) {
+			for (int height : new int[] {256, 384, 1024}) {
+				for (boolean extended : new boolean[] {false, true}) {
+					for (int levels = 1; levels <= 4; levels++) {
+						int radius = BeaconRange.effectRadius(levels, extended);
+						AABB nativeArea = new AABB(pos).inflate(radius).expandTowards(0, height, 0);
+						for (double dx : new double[] {-radius - 1, -radius, 0, radius + .9, radius + 1}) {
+							for (double dy : new double[] {-radius - 2, -radius, 0, height + radius + 1}) {
+								AABB bounds = new AABB(pos.getX() + dx, pos.getY() + dy, pos.getZ(),
+										pos.getX() + dx + .6, pos.getY() + dy + 1.8, pos.getZ() + .6);
+								assertEquals(nativeArea.intersects(bounds), BeaconEffectHud.intersectsRange(pos, radius, height, bounds));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

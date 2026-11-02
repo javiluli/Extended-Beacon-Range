@@ -75,9 +75,10 @@ public final class BeaconEffectHud {
 		}
 	}
 
-	/** Comprueba el volumen vanilla con el radio anunciado por el servidor. */
+	/** Reproduce el volumen vanilla sin crear cajas temporales por beacon y efecto. */
 	static boolean intersectsRange(BlockPos pos, int radius, int worldHeight, AABB bounds) {
-		return radius > 0 && new AABB(pos).inflate(radius).expandTowards(0, worldHeight, 0).intersects(bounds);
+		return radius > 0 && bounds.intersects(pos.getX() - radius, pos.getY() - radius, pos.getZ() - radius,
+				pos.getX() + radius + 1.0, pos.getY() + radius + worldHeight + 1.0, pos.getZ() + radius + 1.0);
 	}
 
 	/** Comprueba el nivel activo y limita la cobertura al intervalo de renovacion vanilla. */
@@ -104,6 +105,7 @@ public final class BeaconEffectHud {
 		EffectCountdown timer = timers.get(effect.getEffect());
 		if (timer == null) { return; }
 		int dark = (int) Math.ceil((1.0f - timer.remainingFraction(partialTick)) * 84);
+		if (dark == 0) { return; }
 		darken(graphics, x, y, 12, 0, Math.min(dark, 12), 3);
 		darken(graphics, x, y, 21, 3, 3, Math.min(dark - 12, 21));
 		int bottom = Math.clamp(dark - 33, 0, 21);
@@ -126,17 +128,25 @@ public final class BeaconEffectHud {
 		if (timer == null) { return; }
 		var levelText = timer.level();
 		var font = Minecraft.getInstance().font;
-		graphics.pose().pushMatrix();
-		graphics.pose().translate(x + 20, y + 15).scale(0.75f);
 		int width = font.width(levelText);
+		graphics.pose().pushMatrix();
+		graphics.pose().translate(x + 20, y + 15).scale(textScale(width + 2, 18));
 		graphics.fill(-width - 1, -1, 1, 9, 0xb0000000);
 		graphics.text(font, levelText, -width, 0, 0xffffffff);
 		graphics.pose().popMatrix();
-		if (BeaconClientConfig.get().showEffectTimers && !timer.time().isEmpty()) {
+		if (BeaconClientConfig.get().showEffectTimers) {
+			String time = timer.time();
+			if (time.isEmpty()) { return; }
+			int timeWidth = font.width(time);
 			graphics.pose().pushMatrix();
-			graphics.pose().translate(x + 12, y + 25).scale(0.75f);
-			graphics.text(font, timer.time(), -font.width(timer.time()) / 2, 0, 0xffffffff);
+			graphics.pose().translate(x + 12, y + 25).scale(textScale(timeWidth, 22));
+			graphics.text(font, time, -timeWidth / 2, 0, 0xffffffff);
 			graphics.pose().popMatrix();
 		}
+	}
+
+	/** Mantiene el tamano habitual y ajusta solo textos que exceden su espacio en el HUD. */
+	static float textScale(int textWidth, int availableWidth) {
+		return Math.min(0.75f, availableWidth / (float) Math.max(1, textWidth));
 	}
 }
