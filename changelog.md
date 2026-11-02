@@ -31,3 +31,4 @@ Fabric, Forge and NeoForge.
 - build: add isolated client runs with optional mod menus
 - build: bump the mod version to 2.1.0
 - docs: refresh loader badges and compact the compatibility table
+- docs: arrange Minecraft compatibility versions from left to right
