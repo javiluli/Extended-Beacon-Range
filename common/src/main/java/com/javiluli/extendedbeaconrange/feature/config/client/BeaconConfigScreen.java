@@ -30,12 +30,23 @@ public final class BeaconConfigScreen extends OptionsSubScreen {
 				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.colorVisualPerimeter.tooltip")),
 				config.colorVisualPerimeter, value -> {
 					config.colorVisualPerimeter = value;
-					if (!config.save()) {
-						Minecraft minecraft = Minecraft.getInstance();
-						minecraft.gui.setScreen(new AlertScreen(() -> minecraft.gui.setScreen(parent),
-								Component.translatable("config.extendedbeaconrange.save_failed"),
-								Component.translatable("config.extendedbeaconrange.save_failed.description")));
-					}
+					save(config, parent);
 				}));
+		list.addBig(OptionInstance.createBoolean("config.extendedbeaconrange.showEffectTimers",
+				OptionInstance.cachedConstantTooltip(Component.translatable("config.extendedbeaconrange.showEffectTimers.tooltip")),
+				config.showEffectTimers, value -> {
+					config.showEffectTimers = value;
+					save(config, parent);
+				}));
+	}
+
+	/** Conserva el aviso de error para todas las opciones de la pantalla. */
+	private static void save(BeaconClientConfig config, Screen parent) {
+		if (!config.save()) {
+			Minecraft minecraft = Minecraft.getInstance();
+			minecraft.gui.setScreen(new AlertScreen(() -> minecraft.gui.setScreen(parent),
+					Component.translatable("config.extendedbeaconrange.save_failed"),
+					Component.translatable("config.extendedbeaconrange.save_failed.description")));
+		}
 	}
 }

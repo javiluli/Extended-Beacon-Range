@@ -2,10 +2,11 @@ package com.javiluli.extendedbeaconrange.feature.perimeter.client;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Locale;
+import java.util.regex.Pattern;
 import com.google.gson.JsonParser;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -29,16 +30,26 @@ class BeaconOverlayMessageTest {
 		assertEquals(enabled ? "options.on" : "options.off", stateContents.getKey());
 		assertEquals(TextColor.fromLegacyFormat(enabled ? ChatFormatting.GREEN : ChatFormatting.RED), state.getStyle().getColor());
 
-		for (String locale : List.of("en_us", "es_es")) {
-			String path = "assets/extendedbeaconrange/lang/" + locale + ".json";
-			try (var stream = getClass().getClassLoader().getResourceAsStream(path)) {
-				assertNotNull(stream, path);
-				var translations = JsonParser.parseReader(new InputStreamReader(stream, StandardCharsets.UTF_8)).getAsJsonObject();
-				assertTrue(translations.has(contents.getKey()), locale + ": missing toggle translation");
-				String pattern = translations.get(contents.getKey()).getAsString();
-				String translated = String.format(Locale.ROOT, pattern, "STATE");
-				assertTrue(translated.endsWith(" STATE"), locale + ": missing state placeholder");
-				assertFalse(translated.contains("%"), locale + ": invalid translation format");
+		var resource = getClass().getClassLoader().getResource("assets/extendedbeaconrange/lang");
+		assertNotNull(resource);
+		Path directory = Path.of(resource.toURI());
+		try (var reader = Files.newBufferedReader(directory.resolve("en_us.json"), StandardCharsets.UTF_8);
+				var files = Files.list(directory)) {
+			var defaults = JsonParser.parseReader(reader).getAsJsonObject();
+			for (Path file : files.filter(path -> path.toString().endsWith(".json")).sorted().toList()) {
+				try (var translationReader = Files.newBufferedReader(file, StandardCharsets.UTF_8)) {
+					var translations = JsonParser.parseReader(translationReader).getAsJsonObject();
+					assertEquals(defaults.keySet(), translations.keySet(), file + ": incomplete translation");
+					for (var entry : translations.entrySet()) {
+						assertTrue(entry.getValue().isJsonPrimitive() && entry.getValue().getAsJsonPrimitive().isString(), file + ": " + entry.getKey());
+						assertFalse(entry.getValue().getAsString().isBlank(), file + ": " + entry.getKey());
+					}
+					String pattern = translations.get(contents.getKey()).getAsString();
+					assertEquals(1, Pattern.compile("%(?:1\\$)?s").matcher(pattern).results().count(), file + ": missing state placeholder");
+					String translated = String.format(Locale.ROOT, pattern, "STATE");
+					assertTrue(translated.contains("STATE"), file + ": missing translated state");
+					assertFalse(translated.contains("%"), file + ": invalid translation format");
+				}
 			}
 		}
 	}

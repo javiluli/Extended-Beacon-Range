@@ -9,6 +9,7 @@ Fabric, Forge and NeoForge.
 ### Features
 
 - feat: share client settings across video settings and mod menus
+- feat: show beacon effect levels and countdowns on the HUD
 
 ### Optimizations
 

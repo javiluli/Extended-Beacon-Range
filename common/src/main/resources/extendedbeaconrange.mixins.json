@@ -4,12 +4,15 @@
   "package": "com.javiluli.extendedbeaconrange.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "range.BeaconRangeMixin"
+    "range.BeaconRangeMixin",
+    "effecthud.BeaconEffectSyncMixin"
   ],
   "client": [
-    "perimeter.client.BeaconClientTickMixin",
+    "client.ClientTickMixin",
     "perimeter.client.BeaconClientLevelMixin",
-    "perimeter.client.BeaconBlockEntityAccessor",
+    "client.BeaconBlockEntityAccessor",
+    "effecthud.client.BeaconEffectTrackingMixin",
+    "effecthud.client.BeaconEffectHudMixin",
     "perimeter.client.OptionsAccessor",
     "client.OptionsLoadMixin",
     "config.client.VideoSettingsScreenMixin",

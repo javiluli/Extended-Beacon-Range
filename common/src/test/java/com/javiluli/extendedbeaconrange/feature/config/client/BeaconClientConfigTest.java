@@ -22,13 +22,31 @@ class BeaconClientConfigTest {
 		Path file = directory.resolve("config/client.json");
 		BeaconClientConfig config = new BeaconClientConfig(file);
 		assertTrue(config.colorVisualPerimeter);
+		assertTrue(config.showEffectTimers);
 		assertTrue(JsonParser.parseString(Files.readString(file)).getAsJsonObject().get("colorVisualPerimeter").getAsBoolean());
 		config.colorVisualPerimeter = false;
+		config.showEffectTimers = false;
 		assertTrue(config.save());
 		assertFalse(new BeaconClientConfig(file).colorVisualPerimeter);
+		assertFalse(new BeaconClientConfig(file).showEffectTimers);
 		config.colorVisualPerimeter = true;
 		assertTrue(config.save());
 		assertTrue(new BeaconClientConfig(file).colorVisualPerimeter);
+		assertFalse(new BeaconClientConfig(file).showEffectTimers);
+	}
+
+	@Test
+	void upgradesOldConfigWithoutResettingThePlayersPerimeterPreference() throws IOException {
+		Path file = directory.resolve("client.json");
+		Files.writeString(file, "{\"colorVisualPerimeter\":false}");
+		BeaconClientConfig config = new BeaconClientConfig(file);
+		assertFalse(config.colorVisualPerimeter);
+		assertTrue(config.showEffectTimers);
+		config.showEffectTimers = false;
+		assertTrue(config.save());
+		BeaconClientConfig reloaded = new BeaconClientConfig(file);
+		assertFalse(reloaded.colorVisualPerimeter);
+		assertFalse(reloaded.showEffectTimers);
 	}
 
 	@Test
@@ -37,6 +55,7 @@ class BeaconClientConfigTest {
 		Files.writeString(file, "{\"otherSetting\":{\"enabled\":true}}");
 		BeaconClientConfig config = new BeaconClientConfig(file);
 		assertTrue(config.colorVisualPerimeter);
+		assertTrue(config.showEffectTimers);
 		config.colorVisualPerimeter = false;
 		assertTrue(config.save());
 		var json = JsonParser.parseString(Files.readString(file)).getAsJsonObject();
@@ -46,12 +65,15 @@ class BeaconClientConfigTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {"{", "[]", "null", "{\"colorVisualPerimeter\":\"false\"}",
-			"{\"colorVisualPerimeter\":null}", "{\"colorVisualPerimeter\":0}"})
+			"{\"colorVisualPerimeter\":null}", "{\"colorVisualPerimeter\":0}",
+			"{\"showEffectTimers\":\"false\"}", "{\"showEffectTimers\":null}",
+			"{\"colorVisualPerimeter\":false,\"showEffectTimers\":0}"})
 	void invalidConfigUsesDefaultWithoutOverwritingOriginal(String contents) throws IOException {
 		Path file = directory.resolve("client.json");
 		Files.writeString(file, contents);
 		BeaconClientConfig config = new BeaconClientConfig(file);
 		assertTrue(config.colorVisualPerimeter);
+		assertTrue(config.showEffectTimers);
 		config.colorVisualPerimeter = false;
 		assertFalse(config.save());
 		assertEquals(contents, Files.readString(file));

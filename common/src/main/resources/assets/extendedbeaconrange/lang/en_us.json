@@ -7,6 +7,8 @@
   "config.extendedbeaconrange.section": "Extended Beacon Range",
   "config.extendedbeaconrange.colorVisualPerimeter": "Colored perimeters",
   "config.extendedbeaconrange.colorVisualPerimeter.tooltip": "Assign a color to each beacon perimeter. When disabled, all perimeters are white. Changes apply immediately.",
+  "config.extendedbeaconrange.showEffectTimers": "Effect timers",
+  "config.extendedbeaconrange.showEffectTimers.tooltip": "Show the remaining time below beacon-effect icons in the HUD. Timers are hidden while a nearby beacon maintains the current effect level. The border countdown and effect levels are always shown. Inventory effects are unchanged.",
   "config.extendedbeaconrange.save_failed": "Could not save beacon settings",
   "config.extendedbeaconrange.save_failed.description": "Changes apply for this session but could not be saved. Check that config/extendedbeaconrange-client.json is valid and writable, then restart the game. The existing file has been preserved."
 }

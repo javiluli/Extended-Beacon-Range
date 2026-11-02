@@ -30,6 +30,8 @@ public final class BeaconClientConfig {
 	private boolean readFailed;
 	/** Usa la paleta por beacon; false muestra todos los perimetros en blanco. */
 	public boolean colorVisualPerimeter = true;
+	/** Muestra el tiempo restante debajo de los efectos de beacon del HUD. */
+	public boolean showEffectTimers = true;
 
 	/** Carga una sola instancia desde el mismo JSON usado por todas las pantallas. */
 	public static BeaconClientConfig get() {
@@ -53,18 +55,25 @@ public final class BeaconClientConfig {
 				throw new JsonParseException("Expected a JSON object");
 			}
 			values = root.getAsJsonObject();
-			JsonElement color = values.get("colorVisualPerimeter");
-			if (color != null) {
-				if (!color.isJsonPrimitive() || !color.getAsJsonPrimitive().isBoolean()) {
-					throw new JsonParseException("colorVisualPerimeter must be a boolean");
-				}
-				colorVisualPerimeter = color.getAsBoolean();
-			}
+			boolean color = readBoolean("colorVisualPerimeter", true);
+			boolean timers = readBoolean("showEffectTimers", true);
+			colorVisualPerimeter = color;
+			showEffectTimers = timers;
 		} catch (IOException | JsonParseException e) {
 			// Preserve unreadable or invalid files instead of replacing the user's settings with defaults.
 			readFailed = true;
 			LOGGER.warn("Could not read beacon client config {}; using defaults", file, e);
 		}
+	}
+
+	/** Valida cada opcion antes de sustituir los valores por defecto. */
+	private boolean readBoolean(String key, boolean fallback) {
+		JsonElement value = values.get(key);
+		if (value == null) { return fallback; }
+		if (!value.isJsonPrimitive() || !value.getAsJsonPrimitive().isBoolean()) {
+			throw new JsonParseException(key + " must be a boolean");
+		}
+		return value.getAsBoolean();
 	}
 
 	/** Persiste de forma atomica; devuelve false si el archivo no puede guardarse con seguridad. */
@@ -77,6 +86,7 @@ public final class BeaconClientConfig {
 			Files.createDirectories(file.toAbsolutePath().getParent());
 			temporary = Files.createTempFile(file.toAbsolutePath().getParent(), "extendedbeaconrange-", ".tmp");
 			values.addProperty("colorVisualPerimeter", colorVisualPerimeter);
+			values.addProperty("showEffectTimers", showEffectTimers);
 			try (Writer writer = Files.newBufferedWriter(temporary)) {
 				GSON.toJson(values, writer);
 			}

@@ -57,8 +57,13 @@ On Minecraft **26.3**, customize your overlay with the in-game settings. Changes
 | Setting | Default | What it does |
 | ------- | :-----: | ------------ |
 | **Colored perimeters** | ON | Gives each beacon perimeter its own color. Turn it off to show all perimeters in white. |
+| **Effect timers** | ON | Shows the remaining time below beacon-effect icons on the HUD. The border countdown and effect levels stay visible when this is off. |
 
 Your settings only affect your own overlay; beacon range and other players are unaffected.
+
+The HUD shows levels and a blue border that darkens clockwise as beacon effects run out. While a loaded beacon maintains the active level, the border stays full and the timer is hidden. A weaker beacon does not hide the countdown for a stronger effect. Inventory effect panels are unchanged.
+
+This applies to Speed, Haste, Resistance, Jump Boost, Strength and Regeneration, including those obtained from potions. Minecraft does not send the effect's source: if beacon coverage cannot be confirmed, the HUD shows the server's remaining duration. With the mod on the server, changes to beacon powers are also synchronized; with a client-only installation, coverage detection can be incomplete.
 
 ## 📏 Range Comparison
 

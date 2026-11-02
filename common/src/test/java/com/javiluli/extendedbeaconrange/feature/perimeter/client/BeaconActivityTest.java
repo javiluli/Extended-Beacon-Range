@@ -2,7 +2,6 @@ package com.javiluli.extendedbeaconrange.feature.perimeter.client;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.javiluli.extendedbeaconrange.mixin.perimeter.client.BeaconBlockEntityAccessor;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.Bootstrap;
@@ -44,7 +43,7 @@ class BeaconActivityTest {
 	}
 
 	// JUnit no aplica mixins; el subtipo expone el mismo nivel fijado en el campo vanilla.
-	private static final class TestBeacon extends BeaconBlockEntity implements BeaconBlockEntityAccessor {
+	private static final class TestBeacon extends BeaconBlockEntity {
 		private final int pyramidLevels;
 
 		TestBeacon(int pyramidLevels) throws ReflectiveOperationException {
@@ -55,7 +54,6 @@ class BeaconActivityTest {
 			levels.setInt(this, pyramidLevels);
 		}
 
-		@Override
 		public int extendedbeaconrange$getLevels() {
 			return pyramidLevels;
 		}

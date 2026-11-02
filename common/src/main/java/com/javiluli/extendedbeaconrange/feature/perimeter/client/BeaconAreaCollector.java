@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import com.javiluli.extendedbeaconrange.feature.config.client.BeaconClientConfig;
 import com.javiluli.extendedbeaconrange.feature.range.BeaconRange;
-import com.javiluli.extendedbeaconrange.mixin.perimeter.client.BeaconBlockEntityAccessor;
+import com.javiluli.extendedbeaconrange.mixin.client.BeaconBlockEntityAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;

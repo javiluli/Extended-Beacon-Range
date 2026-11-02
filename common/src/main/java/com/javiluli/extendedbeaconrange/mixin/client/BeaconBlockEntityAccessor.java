@@ -1,6 +1,9 @@
-package com.javiluli.extendedbeaconrange.mixin.perimeter.client;
+package com.javiluli.extendedbeaconrange.mixin.client;
 
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -20,4 +23,12 @@ public interface BeaconBlockEntityAccessor {
 	 */
 	@Accessor("levels")
 	int extendedbeaconrange$getLevels();
+
+	/** Devuelve el efecto primario sincronizado por Minecraft. */
+	@Accessor("primaryPower")
+	@Nullable Holder<MobEffect> extendedbeaconrange$getPrimaryPower();
+
+	/** Devuelve el efecto secundario sincronizado por Minecraft. */
+	@Accessor("secondaryPower")
+	@Nullable Holder<MobEffect> extendedbeaconrange$getSecondaryPower();
 }
