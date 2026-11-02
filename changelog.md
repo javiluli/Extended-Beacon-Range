@@ -1,34 +1,35 @@
-# Changelog
+<!-- Maintained manually. Copy each commit subject into the matching category, removing only its Conventional Commit prefix and capitalizing the first letter. Use the same wording for pending entries when committing them. -->
 
-<!-- Maintained manually. Use feat:, fix:, perf:, refactor:, build: or docs: without scopes. Copy each commit subject verbatim into this file in the same commit. -->
+---
 
-## 2.1.0 - Minecraft 26.3 (Unreleased)
+## Extended Beacon Range 2.1.0
 
-Fabric, Forge and NeoForge.
+Minecraft 26.3 - Fabric, Forge and NeoForge.
 
-### Features
+#### Gameplay Changes
 
-- feat: share client settings across video settings and mod menus
-- feat: show beacon effect levels and countdowns on the HUD
-- feat: arrange client settings in two columns
+- Share client settings across video settings and mod menus
+- Show beacon effect levels and countdowns on the HUD
+- Arrange client settings in two columns
 
-### Optimizations
+#### Optimizations
 
-- refactor: organize beacon features and optimize perimeter rendering
-- perf: reduce HUD countdown work and fit labels inside their icons
+- Organize beacon features and optimize perimeter rendering
+- Reduce HUD countdown work and fit labels inside their icons
 
-### Bug Fixes
+#### Bug Fixes
 
-- fix: display mod icons, descriptions and project links correctly
-- fix: hide beacon perimeters while their beams are blocked
-- fix: translate perimeter toggle notifications into English and Spanish
-- fix: update resource pack metadata for Minecraft 26.3
-- fix: respect server beacon ranges when detecting effect coverage
+- Display mod icons, descriptions and project links correctly
+- Hide beacon perimeters while their beams are blocked
+- Translate perimeter toggle notifications into English and Spanish
+- Update resource pack metadata for Minecraft 26.3
+- Respect server beacon ranges when detecting effect coverage
 
-### Maintenance and Documentation
+#### Other Changes
 
-- docs: simplify player settings and version-specific issue reports
-- build: add isolated client runs with optional mod menus
-- build: bump the mod version to 2.1.0
-- docs: refresh loader badges and compact the compatibility table
-- docs: arrange Minecraft compatibility versions from left to right
+- Align changelog entries with commit messages
+- Simplify player settings and version-specific issue reports
+- Add isolated client runs with optional mod menus
+- Bump the mod version to 2.1.0
+- Refresh loader badges and compact the compatibility table
+- Arrange Minecraft compatibility versions from left to right
