@@ -1,11 +1,14 @@
 modLoader = "javafml"
 loaderVersion = "${forge_loader_version_range}"
 license = "${license}"
+issueTrackerURL = "https://github.com/javiluli/Extended-Beacon-Range/issues"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${version}"
 displayName = "${mod_name}"
+logoFile = "${icon}"
+displayURL = "https://github.com/javiluli/Extended-Beacon-Range"
 credits = "${credits}"
 authors = "${mod_author}"
 description='''${description}'''

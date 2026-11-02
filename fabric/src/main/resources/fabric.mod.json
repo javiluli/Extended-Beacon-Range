@@ -3,13 +3,15 @@
     "id": "${mod_id}",
     "version": "${version}",
     "name": "${mod_name}",
+    "icon": "${icon}",
     "description": "${description}",
     "authors": [
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://www.curseforge.com/minecraft/mc-mods/extended-beacon-range",
-        "sources": "https://github.com/javiluli/Extended-Beacon-Range"
+        "homepage": "https://github.com/javiluli/Extended-Beacon-Range",
+        "sources": "https://github.com/javiluli/Extended-Beacon-Range",
+        "issues": "https://github.com/javiluli/Extended-Beacon-Range/issues"
     },
     "license": "${license}",
     "environment": "*",
