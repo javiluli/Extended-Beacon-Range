@@ -82,9 +82,15 @@ public final class BeaconOverlayToggle {
 		boolean all = target == null || SELECTION.global;
 		boolean enabled = SELECTION.toggle(target);
 		if (enabled && SELECTION.global) { BeaconAreaCollector.requestGlobalDiscovery(); }
-		Component message = Component.literal(all ? "All beacon perimeters " : "Beacon perimeter ").withStyle(ChatFormatting.WHITE)
-				.append(Component.literal(enabled ? "ON" : "OFF").withStyle(enabled ? ChatFormatting.GREEN : ChatFormatting.RED));
-		minecraft.player.sendOverlayMessage(message);
+		minecraft.player.sendOverlayMessage(toggleMessage(all, enabled));
+	}
+
+	/** Construye el aviso traducible y conserva el color del estado activado o desactivado. */
+	static Component toggleMessage(boolean all, boolean enabled) {
+		Component state = Component.translatable(enabled ? "options.on" : "options.off")
+				.withStyle(enabled ? ChatFormatting.GREEN : ChatFormatting.RED);
+		return Component.translatable(all ? "message.extendedbeaconrange.perimeters.all" : "message.extendedbeaconrange.perimeters.single", state)
+				.withStyle(ChatFormatting.WHITE);
 	}
 
 	/** Obtiene solo el beacon apuntado mediante el alcance normal de interaccion. */

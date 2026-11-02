@@ -1,6 +1,8 @@
 {
   "key.category.extendedbeaconrange.controls": "Extended Beacon Range",
   "key.extendedbeaconrange.toggle_overlay": "Alternar perímetro del beacon seleccionado",
+  "message.extendedbeaconrange.perimeters.all": "Todos los perímetros de beacons %s",
+  "message.extendedbeaconrange.perimeters.single": "Perímetro del beacon %s",
   "config.extendedbeaconrange.title": "Configuración de Extended Beacon Range",
   "config.extendedbeaconrange.section": "Extended Beacon Range",
   "config.extendedbeaconrange.colorVisualPerimeter": "Perímetros de colores",
