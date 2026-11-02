@@ -9,11 +9,6 @@ public final class Constants {
 	 */
 	public static final String MOD_ID = "extendedbeaconrange";
 
-	/**
-	 * Multiplicador aplicado al radio de efecto vanilla del beacon.
-	 */
-	public static final double BEACON_RANGE_MULTIPLIER = 3.0D;
-
 	private Constants() {
 	}
 }

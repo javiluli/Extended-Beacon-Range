@@ -1,4 +1,4 @@
-package com.javiluli.extendedbeaconrange.client.overlay;
+package com.javiluli.extendedbeaconrange.feature.perimeter.client;
 
 /**
  * Valores de configuracion del overlay visual del beacon.
@@ -9,10 +9,6 @@ package com.javiluli.extendedbeaconrange.client.overlay;
  * </p>
  */
 public final class BeaconAreaSettings {
-	/** Desplazamiento binario usado para convertir coordenadas de bloque a coordenadas de chunk. */
-	public static final int CHUNK_COORDINATE_SHIFT = 4;
-	/** Chunk extra alrededor de la distancia de render para evitar cortes visuales en el borde. */
-	public static final int RENDER_DISTANCE_PADDING_CHUNKS = 1;
 	/** Saturacion de los colores calculados por posicion X/Z. */
 	public static final float POSITION_COLOR_SATURATION = 0.88f;
 	/** Brillo de los colores calculados por posicion X/Z. */
@@ -29,8 +25,8 @@ public final class BeaconAreaSettings {
 	public static final float FULL_WALL_FADE_START_HEIGHT = 0.0f;
 	/** Opacidad de las esquinas verticales, usadas como marcas fuertes del limite. */
 	public static final float FULL_WALL_CORNER_ALPHA = 1.0f;
-	/** Anchura visual, en bloques, de cada tira vertical de esquina. */
-	public static final float FULL_WALL_CORNER_WIDTH = 0.12f;
+	/** Seccion cuadrada del poste: 1/16 de bloque (un pixel) de grosor en X y Z. */
+	public static final float FULL_WALL_CORNER_WIDTH = 1.0f / 16.0f;
 	/** Offset interno pequeno para evitar z-fighting sin invadir bloques fuera del rango. */
 	public static final float FULL_WALL_BOX_OFFSET = 0.005f;
 

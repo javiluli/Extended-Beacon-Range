@@ -1,6 +1,6 @@
 package com.javiluli.extendedbeaconrange.mixin.client;
 
-import com.javiluli.extendedbeaconrange.client.overlay.BeaconOverlayToggle;
+import com.javiluli.extendedbeaconrange.feature.perimeter.client.BeaconOverlayToggle;
 
 import net.minecraft.client.Options;
 import org.spongepowered.asm.mixin.Mixin;

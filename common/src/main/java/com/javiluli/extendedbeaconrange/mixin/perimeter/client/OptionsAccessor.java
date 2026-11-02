@@ -1,4 +1,4 @@
-package com.javiluli.extendedbeaconrange.mixin.client;
+package com.javiluli.extendedbeaconrange.mixin.perimeter.client;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;

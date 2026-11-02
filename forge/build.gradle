@@ -7,7 +7,7 @@ base {
 }
 
 tasks.named('jar', Jar) {
-    manifest.attributes('MixinConfigs': "${mod_id}.mixins.json,${mod_id}.forge.mixins.json")
+    manifest.attributes('MixinConfigs': "${mod_id}.mixins.json")
 }
 
 minecraft {
@@ -25,7 +25,6 @@ minecraft {
     runs {
         configureEach {
             args "--mixin.config=${mod_id}.mixins.json"
-            args "--mixin.config=${mod_id}.forge.mixins.json"
             workingDir = file("runs/${name}")
         }
 

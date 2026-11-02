@@ -4,13 +4,15 @@
   "package": "com.javiluli.extendedbeaconrange.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "BeaconRangeMixin"
+    "range.BeaconRangeMixin"
   ],
   "client": [
-    "client.BeaconBlockEntityAccessor",
-    "client.OptionsAccessor",
+    "perimeter.client.BeaconClientTickMixin",
+    "perimeter.client.BeaconClientLevelMixin",
+    "perimeter.client.BeaconBlockEntityAccessor",
+    "perimeter.client.OptionsAccessor",
     "client.OptionsLoadMixin",
-    "client.LevelRendererMixin"
+    "perimeter.client.LevelRendererMixin"
   ],
   "server": [],
   "injectors": {

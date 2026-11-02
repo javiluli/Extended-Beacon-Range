@@ -29,29 +29,27 @@ tasks.register('cleanOutJars', Delete) {
     delete layout.projectDirectory.dir('out_jars')
 }
 
-tasks.register('copyJars', Copy) {
+tasks.register('copyJars', Sync) {
     group = 'build'
     description = 'Copies the final JAR files to the out_jars folder.'
 
-    dependsOn('cleanOutJars', ':neoforge:build', ':fabric:build', ':forge:build')
+    dependsOn(':common:check', ':neoforge:build', ':fabric:build', ':forge:build')
 
     subprojects.forEach { subproject ->
         if (subproject.name != 'common') {
             from(subproject.layout.buildDirectory.dir('libs')) {
                 include "${mod_id}-${subproject.name}-${minecraft_version}-${version}.jar"
-                exclude "*-sources.jar", "*-dev.jar", "*-shadow.jar", "*-all.jar", "*-sources-dev.jar", "*-javadoc.jar"
             }
         }
     }
 
     into layout.projectDirectory.dir('out_jars')
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 tasks.register('buildAll') {
     group = 'dev-run'
-    description = 'Cleans everything and generates the JAR files in the out_jars folder (current version only).'
-    dependsOn 'clean', 'copyJars'
+    description = 'Checks and builds all loaders, then synchronizes the release JARs to out_jars.'
+    dependsOn 'copyJars'
 }
 
 tasks.register('Fabric_runClient') {

@@ -1,9 +1,17 @@
-package com.javiluli.extendedbeaconrange.client.overlay;
+package com.javiluli.extendedbeaconrange.feature.perimeter.client;
+
+import java.util.stream.IntStream;
 
 /**
  * Genera colores intensos y estables para diferenciar beacons cercanos por posicion X/Z.
  */
 public final class BeaconOverlayColors {
+	private static final OverlayColor WHITE = new OverlayColor(1.0f, 1.0f, 1.0f);
+	private static final OverlayColor[] PALETTE = IntStream.range(0, BeaconAreaSettings.POSITION_COLOR_BUCKETS)
+			.mapToObj(bucket -> hsvToRgb(bucket / (float) BeaconAreaSettings.POSITION_COLOR_BUCKETS,
+					BeaconAreaSettings.POSITION_COLOR_SATURATION, BeaconAreaSettings.POSITION_COLOR_VALUE))
+			.toArray(OverlayColor[]::new);
+
 	private BeaconOverlayColors() {
 	}
 
@@ -12,14 +20,17 @@ public final class BeaconOverlayColors {
 	 *
 	 * @param worldX X absoluta del beacon usada como semilla visual.
 	 * @param worldZ Z absoluta del beacon usada como semilla visual.
+	 * @param colored si es false, devuelve blanco para todos los beacons.
 	 * @return color RGB normalizado.
 	 */
-	public static OverlayColor getPositionColor(int worldX, int worldZ) {
+	public static OverlayColor getPositionColor(int worldX, int worldZ, boolean colored) {
+		if (!colored) {
+			return WHITE;
+		}
 		int hash = mixPositionHash(worldX, worldZ);
 		int bucket = Math.floorMod(hash * BeaconAreaSettings.POSITION_COLOR_DISTINCTION_STEP,
 				BeaconAreaSettings.POSITION_COLOR_BUCKETS);
-		float hue = bucket / (float) BeaconAreaSettings.POSITION_COLOR_BUCKETS;
-		return hsvToRgb(hue, BeaconAreaSettings.POSITION_COLOR_SATURATION, BeaconAreaSettings.POSITION_COLOR_VALUE);
+		return PALETTE[bucket];
 	}
 
 	/**

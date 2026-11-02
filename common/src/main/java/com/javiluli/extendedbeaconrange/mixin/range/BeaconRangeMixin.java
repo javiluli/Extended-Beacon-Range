@@ -1,6 +1,6 @@
-package com.javiluli.extendedbeaconrange.mixin;
+package com.javiluli.extendedbeaconrange.mixin.range;
 
-import com.javiluli.extendedbeaconrange.Constants;
+import com.javiluli.extendedbeaconrange.feature.range.BeaconRange;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +16,6 @@ public class BeaconRangeMixin {
 	 */
 	@ModifyVariable(method = "applyEffects", at = @At("STORE"), ordinal = 0)
 	private static double extendApplyEffects(double d) {
-		return d * Constants.BEACON_RANGE_MULTIPLIER;
+		return BeaconRange.extend(d);
 	}
 }

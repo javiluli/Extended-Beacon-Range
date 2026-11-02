@@ -1,4 +1,4 @@
-package com.javiluli.extendedbeaconrange.mixin.client;
+package com.javiluli.extendedbeaconrange.mixin.perimeter.client;
 
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
