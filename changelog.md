@@ -25,3 +25,4 @@ Fabric, Forge and NeoForge.
 
 - docs: simplify player settings and version-specific issue reports
 - build: add isolated client runs with optional mod menus
+- build: bump the mod version to 2.1.0
